@@ -1,0 +1,32 @@
+name: Update RSS Feed
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Every day at 06:00 UTC
+  workflow_dispatch:     # Allows manual run from GitHub UI
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run scraper
+        run: python scraper.py
+
+      - name: Commit and push updated RSS
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/top_improvers.xml
+          git commit -m "Update RSS feed" || echo "No changes to commit"
+          git push
