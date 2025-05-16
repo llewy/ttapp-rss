@@ -33,7 +33,6 @@ def get_player_data():
         driver.save_screenshot(SCREENSHOT_FILE)
         print(f"Screenshot saved to {SCREENSHOT_FILE}")
 
-        # Extract player data using JavaScript
         players = driver.execute_script("""
             return Array.from(document.querySelectorAll('table tbody tr')).map(row => {
                 const cols = row.querySelectorAll('td');
@@ -50,12 +49,11 @@ def get_player_data():
             }).filter(Boolean);
         """)
 
-        # Clean and convert data
         seen = set()
         cleaned_players = []
         for p in players:
             try:
-                key = (p['name'], p['rating'])  # Avoid duplicates
+                key = (p['name'], p['rating'])
                 if key in seen:
                     continue
                 seen.add(key)
@@ -103,92 +101,83 @@ def generate_html(players):
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <title>Grootste stijgers in rating</title>
       <style>
-        /* Reset and base */
         *, *::before, *::after {{
           box-sizing: border-box;
         }}
+
         body {{
           margin: 0;
           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          background: #f4f7f8;
-          color: #222;
-          line-height: 1.6;
-          padding: 20px;
-          min-height: 100vh;
+          background: linear-gradient(135deg, rgba(0, 91, 172, 0.9), rgba(0, 123, 255, 0.9)),
+                      url('https://smash70.com/wp-content/uploads/2023/09/R188174-bewerkt-scaled.jpg') no-repeat center center fixed;
+          background-size: cover;
+          color: white;
           display: flex;
           flex-direction: column;
           align-items: center;
+          padding: 60px 40px;
+          min-height: 100vh;
+          font-size: 1.8rem;
         }}
-        header {{
-          max-width: 800px;
-          width: 100%;
-          text-align: center;
-          margin-bottom: 2rem;
-        }}
-        header h1 {{
-          font-weight: 700;
-          font-size: 2.5rem;
-          margin-bottom: 0.2rem;
-          color: #0066cc;
-        }}
-        header p {{
-          color: #555;
-          font-size: 1.1rem;
-          margin-top: 0;
-        }}
+
         table {{
+          width: 100%;
+          max-width: 1200px;
           border-collapse: collapse;
-          width: 100%;
-          max-width: 800px;
-          background: white;
-          box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
-          border-radius: 8px;
-          overflow: hidden;
-        }}
-        th, td {{
-          text-align: left;
-          padding: 12px 15px;
-          border-bottom: 1px solid #ddd;
-        }}
-        th {{
-          background-color: #007bff;
+          font-size: 2rem;
           color: white;
+        }}
+
+        th {{
+          text-align: left;
+          padding: 20px 30px;
           font-weight: 600;
+          font-size: 2.2rem;
+          border-bottom: 2px solid white;
         }}
+
+        td {{
+          padding: 18px 30px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }}
+
+        tr:last-child td {{
+          border-bottom: none;
+        }}
+
         tr:hover {{
-          background-color: #f1faff;
+          background-color: rgba(255, 255, 255, 0.1);
         }}
-        td.improvement {{
-          font-weight: 700;
-          color: #28a745;
-        }}
-        footer {{
-          margin-top: auto;
-          padding: 15px;
-          font-size: 0.9rem;
-          color: #666;
+
+        .title {{
           text-align: center;
-          width: 100%;
-          max-width: 800px;
+          font-size: 4rem;
+          font-weight: 700;
+          margin-top: 3rem;
+          color: white;
         }}
-        @media (max-width: 600px) {{
+
+        @media (max-width: 768px) {{
           body {{
-            padding: 10px;
+            padding: 40px;
+            font-size: 1.2rem;
           }}
-          header h1 {{
-            font-size: 1.8rem;
+
+          .title {{
+            font-size: 2.5rem;
           }}
+
           table {{
-            font-size: 0.9rem;
+            font-size: 1.4rem;
+          }}
+
+          th, td {{
+            padding: 15px 20px;
           }}
         }}
       </style>
     </head>
     <body>
-      <header>
-        <h1>Grootste stijgers in rating</h1>
-        <p>Dagelijkse lijst van spelers met de hoogste stijging in rating</p>
-      </header>
 
       <table>
         <thead>
@@ -214,15 +203,15 @@ def generate_html(players):
         </tbody>
       </table>
 
+      <div class="title">Grootste stijgers in rating</div>
+
     </body>
     </html>
-    
-""".format(year=datetime.now().year)
+    """
 
-
+    os.makedirs("docs", exist_ok=True)
     with open("docs/index.html", "w", encoding="utf-8") as f:
         f.write(html_content)
-
 
 def main():
     print("Fetching player data...")
