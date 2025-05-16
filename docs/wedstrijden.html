@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NTTB Daily Agenda</title>
+  <style>
+    /* Reset and base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f7f8;
+      color: #222;
+      line-height: 1.6;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      max-width: 800px;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    header h1 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 0.2rem;
+      color: #0066cc;
+    }
+    header p {
+      color: #555;
+      font-size: 1.1rem;
+      margin-top: 0;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+     -shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      text-align: left;
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #007bff;
+      color: white;
+      font-weight: 600;
+    }
+    tr:hover {
+      background-color: #f1faff;
+    }
+    td.improvement {
+      font-weight: 700;
+      color: #28a745;
+    }
+    footer {
+      margin-top: auto;
+      padding: 15px;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      width: 100%;
+      max-width: 800px;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      header h1 {
+        font-size: 1.8rem;
+      }
+      table {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>NTTB Daily Agenda</h1>
+    <p>Fetching agenda for <span id="current-date"></span>...</p>
+  </header>
+  <table id="agenda-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Class</th>
+        <th>Home Team</th>
+        <th>Away Team</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <footer>
+    <p>&copy; 2023 Smash '70</p>
+  </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const currentDate = new Date().toISOString().split('T')[0];
+      document.getElementById('current-date').textContent = currentDate;
+
+      fetch('https://nttb-ranglijsten.nl/dwf/v2/?get_agenda=null', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+          date: currentDate,
+          single: currentDate,
+          club: '1603',
+          jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjAifQ.iEZheZoeSXMJe20oTxlelrXPCxD-lM2nPtSJAlWwrZA',
+          username: '0'
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        const items = JSON.parse(data.items);
+        const tbody = document.querySelector('#agenda-table tbody');
+        items.forEach(item => {
+          const awayTeam = item.cnf_team || item.otm;
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${item.date}</td>
+            <td>${item.kls}</td>
+            <td>${item.sta_team}</td>
+            <td>${awayTeam}</td>
+            <td>${item.sco}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching agenda:', error);
+      });
+    });
+  </script>
+</body>
+</html>
