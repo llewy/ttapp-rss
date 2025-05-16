@@ -94,6 +94,54 @@ def generate_rss(improvements):
     os.makedirs(os.path.dirname(RSS_FILE), exist_ok=True)
     fg.rss_file(RSS_FILE)
 
+def generate_html(players):
+    html_content = f"""
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Top TTapp Rating Improvers</title>
+        <style>
+            body {{ font-family: Arial, sans-serif; margin: 20px; }}
+            table {{ border-collapse: collapse; width: 100%; max-width: 600px; }}
+            th, td {{ border: 1px solid #ddd; padding: 8px; text-align: left; }}
+            th {{ background-color: #f2f2f2; }}
+        </style>
+    </head>
+    <body>
+        <h1>Top TTapp Rating Improvers</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Current Rating</th>
+                    <th>Improvement</th>
+                </tr>
+            </thead>
+            <tbody>
+    """
+
+    for name, rating, diff in players:
+        html_content += f"""
+            <tr>
+                <td>{name}</td>
+                <td>{rating:.2f}</td>
+                <td>+{diff:.2f}</td>
+            </tr>
+        """
+
+    html_content += """
+            </tbody>
+        </table>
+    </body>
+    </html>
+    """
+
+    with open("docs/index.html", "w", encoding="utf-8") as f:
+        f.write(html_content)
+
+
 def main():
     print("Fetching player data...")
     players = get_player_data()
@@ -111,6 +159,7 @@ def main():
 
     print("Generating RSS...")
     generate_rss(top_improvers)
+    generate_html(top_improvers)
     print(f"RSS feed written to {RSS_FILE}")
 
 if __name__ == "__main__":

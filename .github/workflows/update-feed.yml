@@ -23,10 +23,10 @@ jobs:
       - name: Run scraper
         run: python scraper.py
 
-      - name: Commit and push updated RSS
+      - name: Commit and push updated RSS and HTML
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/top_improvers.xml
-          git commit -m "Update RSS feed" || echo "No changes to commit"
+          git add docs/top_improvers.xml docs/index.html
+          git commit -m "Update RSS feed and HTML page" || echo "No changes to commit"
           git push
