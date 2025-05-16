@@ -1,31 +1,30 @@
+
 <!DOCTYPE html>
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NTTB Dagelijkse Agenda</title>
+  <title>Wedstrijden van vandaag</title>
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
     }
-  
 
     body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, rgba(0, 91, 172, 0.9), rgba(0, 123, 255, 0.9)),
-              url('https://smash70.com/wp-content/uploads/2023/09/R188174-bewerkt-scaled.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 60px 40px;
-  min-height: 100vh;
-  font-size: 1.8rem;
-}
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, rgba(0, 91, 172, 0.9), rgba(0, 123, 255, 0.9)),
+                  url('https://smash70.com/wp-content/uploads/2023/09/R188174-bewerkt-scaled.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 40px;
+      min-height: 100vh;
+      font-size: 1.8rem;
+    }
 
-  
     header {
       text-align: center;
       font-size: 4rem;
@@ -33,11 +32,11 @@
       margin-bottom: 2rem;
       color: white;
     }
-  
+
     header p {
       display: none; /* Hide the date */
     }
-  
+
     table {
       width: 100%;
       max-width: 1200px;
@@ -45,7 +44,7 @@
       font-size: 2rem;
       color: white;
     }
-  
+
     th {
       text-align: left;
       padding: 20px 30px;
@@ -53,20 +52,20 @@
       font-size: 2.2rem;
       border-bottom: 2px solid white;
     }
-  
+
     td {
       padding: 18px 30px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     }
-  
+
     tr:last-child td {
       border-bottom: none;
     }
-  
+
     tr:hover {
       background-color: rgba(255, 255, 255, 0.1);
     }
-  
+
     footer {
       margin-top: auto;
       text-align: center;
@@ -74,28 +73,26 @@
       color: rgba(255, 255, 255, 0.6);
       padding: 20px;
     }
-  
+
     @media (max-width: 768px) {
       body {
         padding: 20px;
         font-size: 1.2rem;
       }
-  
+
       header {
         font-size: 2.5rem;
       }
-  
+
       table {
         font-size: 1.4rem;
       }
-  
+
       th, td {
         padding: 15px 20px;
       }
     }
   </style>
-  
-  
 </head>
 <body>
   <header>
@@ -113,6 +110,9 @@
     </thead>
     <tbody></tbody>
   </table>
+  <footer>
+    <p>© 2023 Smash '70</p>
+  </footer>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const currentDate = new Date().toISOString().split('T')[0];
@@ -133,31 +133,30 @@
       })
       .then(response => response.json())
       .then(data => {
-  const items = JSON.parse(data.items);
+        const items = JSON.parse(data.items);
 
-  // Natural sort function for strings with numbers
-  const naturalSort = (a, b) => {
-    const collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
-    return collator.compare(a.sta_team, b.sta_team);
-  };
+        // Natural sort function for strings with numbers
+        const naturalSort = (a, b) => {
+          const collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
+          return collator.compare(a.sta_team, b.sta_team);
+        };
 
-  // Sort items by 'sta_team' using natural sort
-  items.sort(naturalSort);
+        // Sort items by 'sta_team' using natural sort
+        items.sort(naturalSort);
 
-  const tbody = document.querySelector('#agenda-table tbody');
-  items.forEach(item => {
-    const awayTeam = item.cnf_team || item.otm;
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${item.kls}</td>
-      <td>${item.sta_team}</td>
-      <td>${awayTeam}</td>
-      <td>${item.sco}</td>
-    `;
-    tbody.appendChild(row);
-  });
-})
-
+        const tbody = document.querySelector('#agenda-table tbody');
+        items.forEach(item => {
+          const awayTeam = item.cnf_team || item.otm;
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${item.kls}</td>
+            <td>${item.sta_team}</td>
+            <td>${awayTeam}</td>
+            <td>${item.sco}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      })
       .catch(error => {
         console.error('Fout bij ophalen van agenda:', error);
       });
