@@ -151,9 +151,9 @@ def generate_html(players):
 
         .title {{
           text-align: center;
-          font-size: 4rem;
+          font-size: 6rem;
           font-weight: 700;
-          margin-top: 3rem;
+          margin-top: 4rem;
           color: white;
         }}
 
