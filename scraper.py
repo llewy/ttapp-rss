@@ -101,7 +101,7 @@ def generate_html(players):
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>Top TTapp Rating Improvers</title>
+      <title>Grootste stijgers in rating</title>
       <style>
         /* Reset and base */
         *, *::before, *::after {{
@@ -186,16 +186,16 @@ def generate_html(players):
     </head>
     <body>
       <header>
-        <h1>Top TTapp Rating Improvers</h1>
-        <p>Daily updated list of players with the highest rating improvements</p>
+        <h1>Grootste stijgers in rating</h1>
+        <p>Dagelijkse lijst van spelers met de hoogste stijging in rating</p>
       </header>
 
       <table>
         <thead>
           <tr>
-            <th>Player</th>
-            <th>Current Rating</th>
-            <th>Improvement</th>
+            <th>Naam</th>
+            <th>Huidige rating</th>
+            <th>Verbetering</th>
           </tr>
         </thead>
         <tbody>
@@ -214,12 +214,11 @@ def generate_html(players):
         </tbody>
       </table>
 
-      <footer>
-        &copy; {year} TTapp Rating Tracker &mdash; RSS feed available <a href="top_improvers.xml">here</a>.
-      </footer>
     </body>
     </html>
-    """.format(year=datetime.datetime.now().year)
+    
+""".format(year=datetime.now().year)
+
 
     with open("docs/index.html", "w", encoding="utf-8") as f:
         f.write(html_content)
