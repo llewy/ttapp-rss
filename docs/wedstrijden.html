@@ -86,17 +86,15 @@
 </head>
 <body>
   <header>
-    <h1>NTTB Daily Agenda</h1>
-    <p>Fetching agenda for <span id="current-date"></span>...</p>
+    <h1>Wedstrijden van vandaag</h1>
   </header>
   <table id="agenda-table">
     <thead>
       <tr>
-        <th>Date</th>
-        <th>Class</th>
-        <th>Home Team</th>
-        <th>Away Team</th>
-        <th>Score</th>
+        <th>Klasse</th>
+        <th>Thuis</th>
+        <th>Gast</th>
+        <th>Stand</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -116,7 +114,7 @@
         },
         body: new URLSearchParams({
           date: currentDate,
-          single: currentDate,
+          single: '2025-04-18',
           club: '1603',
           jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjAifQ.iEZheZoeSXMJe20oTxlelrXPCxD-lM2nPtSJAlWwrZA',
           username: '0'
@@ -130,7 +128,6 @@
           const awayTeam = item.cnf_team || item.otm;
           const row = document.createElement('tr');
           row.innerHTML = `
-            <td>${item.date}</td>
             <td>${item.kls}</td>
             <td>${item.sta_team}</td>
             <td>${awayTeam}</td>
