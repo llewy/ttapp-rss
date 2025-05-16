@@ -1,0 +1,11 @@
+services:
+  - type: static
+    name: ttapp-rss-feed
+    env: static
+    staticPublishPath: static
+
+  - type: cron
+    name: ttapp-rss-updater
+    schedule: "0 6 * * *"
+    env: python
+    startCommand: "pip install -r requirements.txt && python scraper.py"
