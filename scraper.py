@@ -7,7 +7,7 @@ import time
 
 CLUB_URL = "https://ttapp.nl/#/club/1603/p"
 TOP_N = 5
-RSS_FILE = "top_improvers.xml"
+RSS_FILE = "docs/top_improvers.xml"
 
 def get_player_data():
     options = Options()
