@@ -115,7 +115,7 @@ def generate_html(players):
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding: 60px 40px;
+          padding: 120px 40px;
           min-height: 100vh;
           font-size: 1.8rem;
         }}
