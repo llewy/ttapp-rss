@@ -99,44 +99,127 @@ def generate_html(players):
     <!DOCTYPE html>
     <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Top TTapp Rating Improvers</title>
-        <style>
-            body {{ font-family: Arial, sans-serif; margin: 20px; }}
-            table {{ border-collapse: collapse; width: 100%; max-width: 600px; }}
-            th, td {{ border: 1px solid #ddd; padding: 8px; text-align: left; }}
-            th {{ background-color: #f2f2f2; }}
-        </style>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Top TTapp Rating Improvers</title>
+      <style>
+        /* Reset and base */
+        *, *::before, *::after {{
+          box-sizing: border-box;
+        }}
+        body {{
+          margin: 0;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background: #f4f7f8;
+          color: #222;
+          line-height: 1.6;
+          padding: 20px;
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }}
+        header {{
+          max-width: 800px;
+          width: 100%;
+          text-align: center;
+          margin-bottom: 2rem;
+        }}
+        header h1 {{
+          font-weight: 700;
+          font-size: 2.5rem;
+          margin-bottom: 0.2rem;
+          color: #0066cc;
+        }}
+        header p {{
+          color: #555;
+          font-size: 1.1rem;
+          margin-top: 0;
+        }}
+        table {{
+          border-collapse: collapse;
+          width: 100%;
+          max-width: 800px;
+          background: white;
+          box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+          border-radius: 8px;
+          overflow: hidden;
+        }}
+        th, td {{
+          text-align: left;
+          padding: 12px 15px;
+          border-bottom: 1px solid #ddd;
+        }}
+        th {{
+          background-color: #007bff;
+          color: white;
+          font-weight: 600;
+        }}
+        tr:hover {{
+          background-color: #f1faff;
+        }}
+        td.improvement {{
+          font-weight: 700;
+          color: #28a745;
+        }}
+        footer {{
+          margin-top: auto;
+          padding: 15px;
+          font-size: 0.9rem;
+          color: #666;
+          text-align: center;
+          width: 100%;
+          max-width: 800px;
+        }}
+        @media (max-width: 600px) {{
+          body {{
+            padding: 10px;
+          }}
+          header h1 {{
+            font-size: 1.8rem;
+          }}
+          table {{
+            font-size: 0.9rem;
+          }}
+        }}
+      </style>
     </head>
     <body>
+      <header>
         <h1>Top TTapp Rating Improvers</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Player</th>
-                    <th>Current Rating</th>
-                    <th>Improvement</th>
-                </tr>
-            </thead>
-            <tbody>
+        <p>Daily updated list of players with the highest rating improvements</p>
+      </header>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Current Rating</th>
+            <th>Improvement</th>
+          </tr>
+        </thead>
+        <tbody>
     """
 
     for name, rating, diff in players:
         html_content += f"""
-            <tr>
-                <td>{name}</td>
-                <td>{rating:.2f}</td>
-                <td>+{diff:.2f}</td>
-            </tr>
+          <tr>
+            <td>{name}</td>
+            <td>{rating:.2f}</td>
+            <td class="improvement">+{diff:.2f}</td>
+          </tr>
         """
 
     html_content += """
-            </tbody>
-        </table>
+        </tbody>
+      </table>
+
+      <footer>
+        &copy; {year} TTapp Rating Tracker &mdash; RSS feed available <a href="top_improvers.xml">here</a>.
+      </footer>
     </body>
     </html>
-    """
+    """.format(year=datetime.datetime.now().year)
 
     with open("docs/index.html", "w", encoding="utf-8") as f:
         f.write(html_content)
