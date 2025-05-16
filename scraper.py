@@ -1,42 +1,81 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from feedgen.feed import FeedGenerator
-from datetime import datetime
+from datetime import datetime, timezone
+import os
 import time
 
 CLUB_URL = "https://ttapp.nl/#/club/1603/p"
 TOP_N = 5
 RSS_FILE = "docs/top_improvers.xml"
+SCREENSHOT_FILE = "debug_screenshot.png"
 
 def get_player_data():
     options = Options()
-    options.add_argument('--headless')
+    options.add_argument('--headless=new')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
     driver = webdriver.Chrome(options=options)
-    driver.get(CLUB_URL)
-    
-    time.sleep(5)  # Wait for JS to load the data
 
     players = []
-    rows = driver.find_elements(By.CSS_SELECTOR, "table tbody tr")
-    for row in rows:
-        cols = row.find_elements(By.TAG_NAME, "td")
-        if len(cols) < 4:
-            continue
 
-        name = cols[0].text.strip()
-        rating_str = cols[2].text.strip().replace(',', '.')
-        diff_str = cols[3].text.strip().replace(',', '.')
+    try:
+        driver.get(CLUB_URL)
 
-        try:
-            rating = float(rating_str)
-            diff = float(diff_str)
-            players.append((name, rating, diff))
-        except ValueError:
-            continue  # Skip rows with bad data
+        WebDriverWait(driver, 15).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "body"))
+        )
+        time.sleep(5)  # Allow JS to render
 
-    driver.quit()
-    return players
+        driver.save_screenshot(SCREENSHOT_FILE)
+        print(f"Screenshot saved to {SCREENSHOT_FILE}")
+
+        # Extract player data using JavaScript
+        players = driver.execute_script("""
+            return Array.from(document.querySelectorAll('table tbody tr')).map(row => {
+                const cols = row.querySelectorAll('td');
+                if (cols.length < 2) return null;
+
+                const nameBlock = cols[0].innerText.trim().split('\\n');
+                const name = nameBlock.length >= 2 ? nameBlock[1] : nameBlock[0];
+
+                const ratingBlock = cols[1].innerText.trim().split('\\n');
+                const rating = ratingBlock[0];
+                const diff = ratingBlock.length > 1 ? ratingBlock[1] : '0';
+
+                return { name, rating, diff };
+            }).filter(Boolean);
+        """)
+
+        # Clean and convert data
+        seen = set()
+        cleaned_players = []
+        for p in players:
+            try:
+                key = (p['name'], p['rating'])  # Avoid duplicates
+                if key in seen:
+                    continue
+                seen.add(key)
+
+                rating = float(p['rating'].replace(',', '.').replace('>', '').replace('<', ''))
+                diff = float(p['diff'].replace(',', '.').replace('>', '').replace('<', '').replace('+', ''))
+                cleaned_players.append((p['name'], rating, diff))
+            except ValueError:
+                print(f"Skipping: {p}")
+                continue
+
+        return cleaned_players
+
+    except Exception as e:
+        print(f"Error while scraping: {e}")
+        driver.save_screenshot(SCREENSHOT_FILE)
+        return []
+
+    finally:
+        driver.quit()
 
 def generate_rss(improvements):
     fg = FeedGenerator()
@@ -50,13 +89,19 @@ def generate_rss(improvements):
         fe.title(f"{name}: +{diff:.2f} points")
         fe.link(href=CLUB_URL)
         fe.description(f"{name} improved by {diff:.2f} points (Current Rating: {rating:.2f})")
-        fe.pubDate(datetime.utcnow())
+        fe.pubDate(datetime.now(timezone.utc))
 
+    os.makedirs(os.path.dirname(RSS_FILE), exist_ok=True)
     fg.rss_file(RSS_FILE)
 
 def main():
     print("Fetching player data...")
     players = get_player_data()
+    print(f"Found {len(players)} players")
+
+    if not players:
+        print("No players found! Check screenshot or website structure.")
+        return
 
     top_improvers = sorted(players, key=lambda x: x[2], reverse=True)[:TOP_N]
 
