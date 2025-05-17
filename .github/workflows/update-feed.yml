@@ -26,10 +26,13 @@ jobs:
       - name: Run scraper
         run: python scraper.py
 
-      - name: Commit and push updated RSS and HTML
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/top_improvers.xml docs/index.html docs/wedstrijden.html
-          git commit -m "Update RSS feed and HTML page" || echo "No changes to commit"
-          git push
+- name: Commit and push updated RSS and HTML
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  run: |
+    git config --global user.name "github-actions[bot]"
+    git config --global user.email "github-actions[bot]@users.noreply.github.com"
+    git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
+    git add docs/top_improvers.xml docs/index.html docs/wedstrijden.html
+    git commit -m "Update RSS feed and HTML page" || echo "No changes to commit"
+    git push origin HEAD
