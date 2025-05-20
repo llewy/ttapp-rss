@@ -3,7 +3,6 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from feedgen.feed import FeedGenerator
 from datetime import datetime, timezone
 import os
 import time
@@ -74,23 +73,6 @@ def get_player_data():
 
     finally:
         driver.quit()
-
-def generate_rss(improvements):
-    fg = FeedGenerator()
-    fg.title("Top Rating Improvers - TTapp Club 1603")
-    fg.link(href=CLUB_URL)
-    fg.description("Top rating improvements for TTapp Club 1603")
-    fg.language("en")
-
-    for name, rating, diff in improvements:
-        fe = fg.add_entry()
-        fe.title(f"{name}: +{diff:.2f} points")
-        fe.link(href=CLUB_URL)
-        fe.description(f"{name} improved by {diff:.2f} points (Current Rating: {rating:.2f})")
-        fe.pubDate(datetime.now(timezone.utc))
-
-    os.makedirs(os.path.dirname(RSS_FILE), exist_ok=True)
-    fg.rss_file(RSS_FILE)
 
 def generate_html(players):
     html_content = f"""
@@ -228,10 +210,8 @@ def main():
     for name, rating, diff in top_improvers:
         print(f"- {name}: +{diff:.2f} (Now {rating:.2f})")
 
-    print("Generating RSS...")
-    generate_rss(top_improvers)
+    print("Generating html...")
     generate_html(top_improvers)
-    print(f"RSS feed written to {RSS_FILE}")
-
+  
 if __name__ == "__main__":
     main()
