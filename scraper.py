@@ -3,20 +3,18 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from datetime import datetime, timezone
 import os
 import time
 
 CLUB_URL = "https://ttapp.nl/#/club/1603/p"
 TOP_N = 5
-RSS_FILE = "docs/top_improvers.xml"
 SCREENSHOT_FILE = "debug_screenshot.png"
 
 def get_player_data():
     options = Options()
     options.add_argument('--headless=new')
     options.add_argument('--disable-gpu')
-    options.add_argument('--window-size=1920,1080')
+    options.add_argument('--window-size=1280,720')  # 720p resolution
     driver = webdriver.Chrome(options=options)
 
     players = []
@@ -77,7 +75,7 @@ def get_player_data():
 def generate_html(players):
     html_content = f"""
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="nl">
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -97,29 +95,39 @@ def generate_html(players):
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding: 120px 40px;
+          padding: 40px 20px;
           min-height: 100vh;
-          font-size: 1.8rem;
+          font-size: 1.2rem;
+        }}
+
+        .title {{
+          text-align: center;
+          font-size: 2.5rem;
+          font-weight: 700;
+          margin: 2rem 0;
+          color: white;
         }}
 
         table {{
           width: 100%;
-          max-width: 1200px;
+          max-width: 1000px;
           border-collapse: collapse;
-          font-size: 2rem;
+          font-size: 1.2rem;
           color: white;
         }}
 
-        th {{
+        th, td {{
+          padding: 12px 16px;
           text-align: left;
-          padding: 20px 30px;
+        }}
+
+        th {{
           font-weight: 600;
-          font-size: 2.2rem;
+          font-size: 1.3rem;
           border-bottom: 2px solid white;
         }}
 
         td {{
-          padding: 18px 30px;
           border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }}
 
@@ -131,35 +139,29 @@ def generate_html(players):
           background-color: rgba(255, 255, 255, 0.1);
         }}
 
-        .title {{
-          text-align: center;
-          font-size: 6rem;
-          font-weight: 700;
-          margin-top: 4rem;
-          color: white;
-        }}
-
         @media (max-width: 768px) {{
           body {{
-            padding: 40px;
-            font-size: 1.2rem;
+            padding: 20px;
+            font-size: 1rem;
           }}
 
           .title {{
-            font-size: 2.5rem;
+            font-size: 2rem;
           }}
 
           table {{
-            font-size: 1.4rem;
+            font-size: 1rem;
           }}
 
           th, td {{
-            padding: 15px 20px;
+            padding: 10px 12px;
           }}
         }}
       </style>
     </head>
     <body>
+
+      <div class="title">Grootste stijgers in rating</div>
 
       <table>
         <thead>
@@ -184,8 +186,6 @@ def generate_html(players):
     html_content += """
         </tbody>
       </table>
-
-      <div class="title">Grootste stijgers in rating</div>
 
     </body>
     </html>
@@ -212,6 +212,6 @@ def main():
 
     print("Generating html...")
     generate_html(top_improvers)
-  
+
 if __name__ == "__main__":
     main()
