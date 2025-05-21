@@ -14,7 +14,7 @@ def get_player_data():
     options = Options()
     options.add_argument('--headless=new')
     options.add_argument('--disable-gpu')
-    options.add_argument('--window-size=1280,720')  # 720p resolution
+    options.add_argument('--window-size=1280,720')
     driver = webdriver.Chrome(options=options)
 
     players = []
@@ -25,7 +25,7 @@ def get_player_data():
         WebDriverWait(driver, 15).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, "body"))
         )
-        time.sleep(5)  # Allow JS to render
+        time.sleep(5)
 
         driver.save_screenshot(SCREENSHOT_FILE)
         print(f"Screenshot saved to {SCREENSHOT_FILE}")
@@ -95,9 +95,9 @@ def generate_html(players):
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding: 40px 20px;
+          padding: 2rem 1rem;
           min-height: 100vh;
-          font-size: 1.2rem;
+          font-size: 1.1rem;
         }}
 
         .title {{
@@ -108,12 +108,18 @@ def generate_html(players):
           color: white;
         }}
 
-        table {{
+        .table-container {{
           width: 100%;
           max-width: 1000px;
+          overflow-x: auto;
+        }}
+
+        table {{
+          width: 100%;
           border-collapse: collapse;
-          font-size: 1.2rem;
+          font-size: 1.1rem;
           color: white;
+          min-width: 600px;
         }}
 
         th, td {{
@@ -123,7 +129,7 @@ def generate_html(players):
 
         th {{
           font-weight: 600;
-          font-size: 1.3rem;
+          font-size: 1.2rem;
           border-bottom: 2px solid white;
         }}
 
@@ -140,11 +146,6 @@ def generate_html(players):
         }}
 
         @media (max-width: 768px) {{
-          body {{
-            padding: 20px;
-            font-size: 1rem;
-          }}
-
           .title {{
             font-size: 2rem;
           }}
@@ -163,29 +164,31 @@ def generate_html(players):
 
       <div class="title">Grootste stijgers in rating</div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Naam</th>
-            <th>Huidige rating</th>
-            <th>Verbetering</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Naam</th>
+              <th>Huidige rating</th>
+              <th>Verbetering</th>
+            </tr>
+          </thead>
+          <tbody>
     """
 
     for name, rating, diff in players:
         html_content += f"""
-          <tr>
-            <td>{name}</td>
-            <td>{rating:.2f}</td>
-            <td class="improvement">+{diff:.2f}</td>
-          </tr>
+            <tr>
+              <td>{name}</td>
+              <td>{rating:.2f}</td>
+              <td class="improvement">+{diff:.2f}</td>
+            </tr>
         """
 
     html_content += """
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
 
     </body>
     </html>
