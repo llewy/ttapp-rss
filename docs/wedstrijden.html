@@ -17,26 +17,26 @@
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, rgba(0, 91, 172, 0.9), rgba(0, 123, 255, 0.9)),
-                  url('https://smash70.com/wp-content/uploads/2023/09/R188174-bewerkt-scaled.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem 1rem;
-      min-height: 100vh;
-      font-size: clamp(1rem, 1.2vw, 1.3rem);
-    }
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, rgba(0, 91, 172, 0.9), rgba(0, 123, 255, 0.9)),
+              url('https://smash70.com/wp-content/uploads/2023/09/R188174-bewerkt-scaled.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 1.5rem;
+  min-height: 100vh;
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+}
 
-    header {
-      text-align: center;
-      font-size: clamp(2.5rem, 4vw, 3.5rem);
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      color: white;
-    }
+header {
+  text-align: center;
+  font-size: clamp(3rem, 5vw, 4rem);
+  font-weight: 700;
+  margin: 0.5rem 0 1rem 0;
+  color: white;
+}
 
     header p {
       display: none;
@@ -44,28 +44,31 @@
 
     .table-container {
       width: 100%;
-      max-width: 1000px;
-      overflow-x: auto;
+      max-width: 1400px;
       background: rgba(0, 0, 0, 0.3);
-      border-radius: 12px;
-      padding: 1rem;
+      backdrop-filter: blur(6px);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+      overflow-x: auto;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: clamp(1rem, 1.2vw, 1.4rem);
+      font-size: clamp(1.4rem, 2vw, 1.8rem);
       color: white;
+      min-width: 800px;
     }
 
     th, td {
-      padding: 1rem;
+      padding: 20px 28px;
       text-align: left;
     }
 
     th {
-      font-weight: 600;
-      font-size: 1.2em;
+      font-weight: 700;
+      font-size: clamp(1.6rem, 2.2vw, 2rem);
       border-bottom: 2px solid white;
     }
 
@@ -84,26 +87,27 @@
     footer {
       margin-top: auto;
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 1rem;
       color: rgba(255, 255, 255, 0.6);
-      padding: 15px;
+      padding: 20px;
     }
 
     @media (max-width: 768px) {
       body {
-        padding: 1rem;
+        padding: 2rem 1rem;
+        font-size: 1.1rem;
       }
 
       header {
-        font-size: 2rem;
-      }
-
-      .table-container {
-        padding: 0.5rem;
+        font-size: 2.2rem;
       }
 
       th, td {
-        padding: 0.75rem;
+        padding: 14px 18px;
+      }
+
+      .table-container {
+        padding: 1rem;
       }
     }
   </style>
