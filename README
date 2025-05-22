@@ -1,0 +1,5 @@
+scraper.py haalt middels /github/workflow/update-feed.yml 1x per dag de ratings van alle spelers van smash van ttapp.nl 
+en schrijft deze weg naar /docs/index.html
+
+/docs/wedstrijden.html haalt de wedstrijden van vandaag van uit het dwf van de nttb-ranglijsten.nl. 
+jwt-token is hardcoded en moet mogelijk vervangen worden. 

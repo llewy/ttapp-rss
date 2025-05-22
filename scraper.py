@@ -96,7 +96,7 @@ def generate_html(players):
           display: grid;
           place-items: center;
           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          background: linear-gradient(135deg, rgba(0, 91, 172, 0.85), rgba(0, 123, 255, 0.85)),
+          background: linear-gradient(rgba(10, 30, 60, 0.85), rgba(10, 30, 60, 0.85)),
                       url('https://smash70.com/wp-content/uploads/2024/04/Kidspong-3.jpg') no-repeat center center fixed;
           background-size: cover;
           color: white;

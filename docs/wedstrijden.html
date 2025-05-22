@@ -9,8 +9,14 @@
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, rgba(0, 91, 172, 0.9), rgba(0, 123, 255, 0.9)),
                   url('https://smash70.com/wp-content/uploads/2023/09/R188174-bewerkt-scaled.jpg') no-repeat center center fixed;
@@ -19,14 +25,14 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 20px;
+      padding: 2rem 1rem;
       min-height: 100vh;
-      font-size: 1.2rem;
+      font-size: clamp(1rem, 1.2vw, 1.3rem);
     }
 
     header {
       text-align: center;
-      font-size: 2.5rem;
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
       font-weight: 700;
       margin-bottom: 1.5rem;
       color: white;
@@ -36,22 +42,30 @@
       display: none;
     }
 
-    table {
+    .table-container {
       width: 100%;
       max-width: 1000px;
+      overflow-x: auto;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+
+    table {
+      width: 100%;
       border-collapse: collapse;
-      font-size: 1.2rem;
+      font-size: clamp(1rem, 1.2vw, 1.4rem);
       color: white;
     }
 
     th, td {
-      padding: 12px 16px;
+      padding: 1rem;
       text-align: left;
     }
 
     th {
       font-weight: 600;
-      font-size: 1.3rem;
+      font-size: 1.2em;
       border-bottom: 2px solid white;
     }
 
@@ -77,20 +91,19 @@
 
     @media (max-width: 768px) {
       body {
-        padding: 20px;
-        font-size: 1rem;
+        padding: 1rem;
       }
 
       header {
         font-size: 2rem;
       }
 
-      table {
-        font-size: 1rem;
+      .table-container {
+        padding: 0.5rem;
       }
 
       th, td {
-        padding: 10px 12px;
+        padding: 0.75rem;
       }
     }
   </style>
@@ -100,20 +113,25 @@
     <h1>Wedstrijden van vandaag</h1>
     <p><span id="current-date"></span></p>
   </header>
-  <table id="agenda-table">
-    <thead>
-      <tr>
-        <th>Klasse</th>
-        <th>Thuisteam</th>
-        <th>Uitteam</th>
-        <th>Score</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+
+  <div class="table-container">
+    <table id="agenda-table">
+      <thead>
+        <tr>
+          <th>Klasse</th>
+          <th>Thuisteam</th>
+          <th>Uitteam</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
   <footer>
     <p></p>
   </footer>
+
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const currentDate = new Date().toISOString().split('T')[0];
