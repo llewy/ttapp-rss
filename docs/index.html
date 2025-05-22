@@ -20,9 +20,9 @@
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding: 40px 20px;
+          padding: 2rem 1rem;
           min-height: 100vh;
-          font-size: 1.2rem;
+          font-size: 1.1rem;
         }
 
         .title {
@@ -33,12 +33,18 @@
           color: white;
         }
 
-        table {
+        .table-container {
           width: 100%;
           max-width: 1000px;
+          overflow-x: auto;
+        }
+
+        table {
+          width: 100%;
           border-collapse: collapse;
-          font-size: 1.2rem;
+          font-size: 1.1rem;
           color: white;
+          min-width: 600px;
         }
 
         th, td {
@@ -48,7 +54,7 @@
 
         th {
           font-weight: 600;
-          font-size: 1.3rem;
+          font-size: 1.2rem;
           border-bottom: 2px solid white;
         }
 
@@ -65,11 +71,6 @@
         }
 
         @media (max-width: 768px) {
-          body {
-            padding: 20px;
-            font-size: 1rem;
-          }
-
           .title {
             font-size: 2rem;
           }
@@ -88,48 +89,50 @@
 
       <div class="title">Grootste stijgers in rating</div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Naam</th>
-            <th>Huidige rating</th>
-            <th>Verbetering</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Naam</th>
+              <th>Huidige rating</th>
+              <th>Verbetering</th>
+            </tr>
+          </thead>
+          <tbody>
     
-          <tr>
-            <td>Anniek van 't Holt</td>
-            <td>1667.00</td>
-            <td class="improvement">+150.00</td>
-          </tr>
+            <tr>
+              <td>Anniek van 't Holt</td>
+              <td>1667.00</td>
+              <td class="improvement">+150.00</td>
+            </tr>
         
-          <tr>
-            <td>Lukas Bosbach</td>
-            <td>2371.00</td>
-            <td class="improvement">+100.00</td>
-          </tr>
+            <tr>
+              <td>Lukas Bosbach</td>
+              <td>2371.00</td>
+              <td class="improvement">+100.00</td>
+            </tr>
         
-          <tr>
-            <td>Chris Verwoert</td>
-            <td>2073.00</td>
-            <td class="improvement">+76.00</td>
-          </tr>
+            <tr>
+              <td>Chris Verwoert</td>
+              <td>2073.00</td>
+              <td class="improvement">+76.00</td>
+            </tr>
         
-          <tr>
-            <td>Steven Tijssen</td>
-            <td>1551.00</td>
-            <td class="improvement">+64.00</td>
-          </tr>
+            <tr>
+              <td>Steven Tijssen</td>
+              <td>1551.00</td>
+              <td class="improvement">+64.00</td>
+            </tr>
         
-          <tr>
-            <td>Ernst Bouwmeester</td>
-            <td>866.00</td>
-            <td class="improvement">+52.00</td>
-          </tr>
+            <tr>
+              <td>Ernst Bouwmeester</td>
+              <td>866.00</td>
+              <td class="improvement">+52.00</td>
+            </tr>
         
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
 
     </body>
     </html>
