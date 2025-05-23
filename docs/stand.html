@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="300">
+  <title>Stand Eredivisie</title>
+  <style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, rgba(0, 91, 172, 0.9), rgba(0, 123, 255, 0.9)),
+                url('https://smash70.com/wp-content/uploads/2023/09/R188174-bewerkt-scaled.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 1rem;
+    min-height: 100vh;
+    font-size: 1rem;
+  }
+
+  header {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 1rem 0 0.5rem;
+    color: white;
+  }
+
+  header p {
+    display: none;
+  }
+
+  .table-container {
+    width: 100%;
+    max-width: 1000px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    overflow-x: auto;
+    padding: 1rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    color: white;
+    min-width: 600px;
+  }
+
+  th, td {
+    padding: 10px 14px;
+    text-align: left;
+  }
+
+  th {
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-bottom: 2px solid white;
+  }
+
+  td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  footer {
+    margin-top: auto;
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    padding: 10px;
+  }
+
+  @media (max-width: 768px) {
+    body {
+      padding: 1rem;
+      font-size: 0.95rem;
+    }
+
+    header {
+      font-size: 1.6rem;
+      margin: 0.5rem 0;
+    }
+
+    .table-container {
+      padding: 0.5rem;
+    }
+
+    table {
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      padding: 8px 10px;
+    }
+  }
+</style>
+</head>
+<body>
+  <header>Eredivisie Stand</header>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr><th>Team</th><th>Gespeeld</th><th>Punten</th></tr>
+      </thead>
+      <tbody>
+<tr><td>Estillon Maashorst 1</td><td>7</td><td>38</td></tr>
+<tr><td>Klimaatgroep Stars 1</td><td>7</td><td>30</td></tr>
+<tr><td>Hilversum 1</td><td>7</td><td>29</td></tr>
+<tr style="font-weight:bold;"><td>van Wijnen/Smash '70 1</td><td>7</td><td>21</td></tr>
+<tr><td>VeerhuisWessem/Westa 1</td><td>7</td><td>18</td></tr>
+<tr><td>InnovaN/SKF 1</td><td>7</td><td>11</td></tr>
+<tr><td>Taverzo 2</td><td>7</td><td>10</td></tr>
