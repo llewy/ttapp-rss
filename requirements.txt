@@ -1,2 +1,3 @@
 selenium
-feedgen
+bs4
+requests
