@@ -3,3 +3,5 @@ en schrijft deze weg naar /docs/index.html
 
 /docs/wedstrijden.html haalt de wedstrijden van vandaag van uit het dwf van de nttb-ranglijsten.nl. 
 jwt-token is hardcoded en moet mogelijk vervangen worden. 
+
+generate_standings_page.py schrijft de eredivisiestand weg naar docs/stand.html
