@@ -10,58 +10,56 @@ CSS_STYLE = """
     box-sizing: border-box;
   }
 
-  body {
+  html, body {
     margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  body {
+    display: grid;
+    place-items: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, rgba(0, 91, 172, 0.9), rgba(0, 123, 255, 0.9)),
                 url('https://smash70.com/wp-content/uploads/2023/09/R188174-bewerkt-scaled.jpg') no-repeat center center fixed;
     background-size: cover;
     color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1.5rem 1rem;
-    min-height: 100vh;
-    font-size: 1rem;
+    padding: 2rem;
   }
 
   header {
     text-align: center;
-    font-size: 2rem;
-    font-weight: 700;
-    margin: 1rem 0 0.5rem;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 2rem;
     color: white;
-  }
-
-  header p {
-    display: none;
   }
 
   .table-container {
     width: 100%;
     max-width: 1000px;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 12px;
     overflow-x: auto;
+    background: rgba(0, 0, 0, 0.4);
     padding: 1rem;
+    border-radius: 12px;
   }
 
   table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 1rem;
+    font-size: clamp(1.2rem, 2vw, 2rem);
     color: white;
-    min-width: 600px;
   }
 
   th, td {
-    padding: 10px 14px;
+    padding: 1rem;
     text-align: left;
   }
 
   th {
-    font-weight: 600;
-    font-size: 1.1rem;
+    font-weight: 700;
+    font-size: 1.4em;
     border-bottom: 2px solid white;
   }
 
@@ -69,43 +67,24 @@ CSS_STYLE = """
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   }
 
-  tr:last-child td {
-    border-bottom: none;
-  }
-
   tr:hover {
     background-color: rgba(255, 255, 255, 0.1);
   }
 
   footer {
-    margin-top: auto;
+    margin-top: 2rem;
     text-align: center;
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.6);
-    padding: 10px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
   }
 
   @media (max-width: 768px) {
-    body {
-      padding: 1rem;
-      font-size: 0.95rem;
-    }
-
-    header {
-      font-size: 1.6rem;
-      margin: 0.5rem 0;
-    }
-
     .table-container {
       padding: 0.5rem;
     }
 
-    table {
-      font-size: 0.95rem;
-    }
-
     th, td {
-      padding: 8px 10px;
+      padding: 0.5rem;
     }
   }
 """
@@ -118,7 +97,7 @@ def get_standings_from_nttb(url):
     table = soup.find("table")
     standings = []
 
-    rows = table.find_all("tr")[1:]  # Skip header
+    rows = table.find_all("tr")[1:]  # Skip header row
     for row in rows:
         cols = row.find_all("td")
         if len(cols) >= 5:
@@ -153,10 +132,10 @@ def generate_standings_html(standings):
         row_style = ' style="font-weight:bold;"' if "Smash '70" in team else ""
         html += f"<tr{row_style}><td>{team}</td><td>{played}</td><td>{points}</td></tr>\n"
 
-    """      </tbody>
+    html += """      </tbody>
     </table>
   </div>
-  <footer>Bron: nttb-ranglijsten.nl — Pagina ververst elke dag</footer>
+  <footer>Bron: nttb-ranglijsten.nl — Pagina ververst elke 5 minuten</footer>
 </body>
 </html>"""
 
