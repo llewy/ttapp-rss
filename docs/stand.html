@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="300">
+  <title>Stand Eredivisie</title>
+  <style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  body {
+    display: grid;
+    place-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, rgba(0, 91, 172, 0.9), rgba(0, 123, 255, 0.9)),
+                url('https://smash70.com/wp-content/uploads/2023/09/R188174-bewerkt-scaled.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    padding: 2rem;
+  }
+
+  header {
+    text-align: center;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 2rem;
+    color: white;
+  }
+
+  .table-container {
+    width: 100%;
+    max-width: 1000px;
+    overflow-x: auto;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: clamp(1.2rem, 2vw, 2rem);
+    color: white;
+  }
+
+  th, td {
+    padding: 1rem;
+    text-align: left;
+  }
+
+  th {
+    font-weight: 700;
+    font-size: 1.4em;
+    border-bottom: 2px solid white;
+  }
+
+  td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  footer {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  @media (max-width: 768px) {
+    .table-container {
+      padding: 0.5rem;
+    }
+
+    th, td {
+      padding: 0.5rem;
+    }
+  }
+</style>
+</head>
+<body>
+  <header>Eredivisie Stand</header>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr><th>Team</th><th>Gespeeld</th><th>Punten</th></tr>
+      </thead>
+      <tbody>
+<tr><td>Estillon Maashorst 1</td><td>7</td><td>38</td></tr>
+<tr><td>Klimaatgroep Stars 1</td><td>7</td><td>30</td></tr>
+<tr><td>Hilversum 1</td><td>7</td><td>29</td></tr>
+<tr style="font-weight:bold;"><td>van Wijnen/Smash '70 1</td><td>7</td><td>21</td></tr>
+<tr><td>VeerhuisWessem/Westa 1</td><td>7</td><td>18</td></tr>
+<tr><td>InnovaN/SKF 1</td><td>7</td><td>11</td></tr>
+<tr><td>Taverzo 2</td><td>7</td><td>10</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <footer>Bron: nttb-ranglijsten.nl — Pagina ververst elke 5 minuten</footer>
+</body>
+</html>
