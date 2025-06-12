@@ -135,7 +135,7 @@ def generate_standings_html(standings):
     html += """      </tbody>
     </table>
   </div>
-  <footer>Bron: nttb-ranglijsten.nl — Pagina ververst elke 5 minuten</footer>
+  <footer>Bron: nttb-ranglijsten.nl</footer>
 </body>
 </html>"""
 
