@@ -2,7 +2,7 @@ import os
 import requests
 from bs4 import BeautifulSoup
 
-STANDINGS_URL = "https://www.nttb-ranglijsten.nl/stand_frame.php?pID=1022398"
+STANDINGS_URL = "https://www.nttb-ranglijsten.nl/stand_frame.php?pID=1022898"
 OUTPUT_FILE = "docs/stand.html"
 
 CSS_STYLE = """
