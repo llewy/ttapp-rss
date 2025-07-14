@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wedstrijden van vandaag</title>
   <style>
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
     }
 
@@ -13,7 +16,7 @@
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, rgba(0, 91, 172, 0.9), rgba(0, 123, 255, 0.9)),
-                  url('https://smash70.com/wp-content/uploads/2023/09/R188174-bewerkt-scaled.jpg') no-repeat center center fixed;
+        url('https://smash70.com/wp-content/uploads/2023/09/R188174-bewerkt-scaled.jpg') no-repeat center center fixed;
       background-size: cover;
       color: white;
       display: flex;
@@ -53,7 +56,8 @@
       min-width: 600px;
     }
 
-    th, td {
+    th,
+    td {
       padding: 10px 14px;
       text-align: left;
     }
@@ -103,12 +107,14 @@
         font-size: 0.95rem;
       }
 
-      th, td {
+      th,
+      td {
         padding: 8px 10px;
       }
     }
   </style>
 </head>
+
 <body>
   <header>
     <h1>Wedstrijden van vandaag</h1>
@@ -151,35 +157,36 @@
           username: '0'
         })
       })
-      .then(response => response.json())
-.then(data => {
-  const items = JSON.parse(data.items);
+        .then(response => response.json())
+        .then(data => {
+          const items = JSON.parse(data.items);
 
-  // Filter for your own hometeams
-  const filteredItems = items.filter(item =>
-    item.htm &&
-    (item.htm.includes("Smash '70 (H)") || item.htm.includes("van Wijnen/Smash '70"))
-  );
+          // Filter for your own hometeams
+          const filteredItems = items.filter(item =>
+            item.htm &&
+            (item.htm.includes("Smash '70 (H)") || item.htm.includes("van Wijnen/Smash '70"))
+          );
 
-  const tbody = document.querySelector('#agenda-table tbody');
-  filteredItems.forEach(item => {
-    const homeTeam = item.htm;
-    const awayTeam = item.otm;
-    const row = document.createElement('tr');
-    row.innerHTML = `
+          const tbody = document.querySelector('#agenda-table tbody');
+          filteredItems.forEach(item => {
+            const homeTeam = item.htm;
+            const awayTeam = item.otm;
+            const row = document.createElement('tr');
+            row.innerHTML = `
       <td>${item.kls}</td>
       <td>${homeTeam}</td>
       <td>${awayTeam}</td>
       <td>${item.sco}</td>
     `;
-    tbody.appendChild(row);
-  });
-})
+            tbody.appendChild(row);
+          });
+        })
 
-      .catch(error => {
-        console.error('Fout bij ophalen van agenda:', error);
-      });
+        .catch(error => {
+          console.error('Fout bij ophalen van agenda:', error);
+        });
     });
   </script>
 </body>
+
 </html>
