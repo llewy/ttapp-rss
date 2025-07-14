@@ -152,29 +152,30 @@
         })
       })
       .then(response => response.json())
-      .then(data => {
-        const items = JSON.parse(data.items);
+.then(data => {
+  const items = JSON.parse(data.items);
 
-        const naturalSort = (a, b) => {
-          const collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
-          return collator.compare(a.sta_team, b.sta_team);
-        };
+  // Filter for your own hometeams
+  const filteredItems = items.filter(item =>
+    item.htm &&
+    (item.htm.includes("Smash '70 (H)") || item.htm.includes("van Wijnen/Smash '70"))
+  );
 
-        items.sort(naturalSort);
+  const tbody = document.querySelector('#agenda-table tbody');
+  filteredItems.forEach(item => {
+    const homeTeam = item.htm;
+    const awayTeam = item.otm;
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${item.kls}</td>
+      <td>${homeTeam}</td>
+      <td>${awayTeam}</td>
+      <td>${item.sco}</td>
+    `;
+    tbody.appendChild(row);
+  });
+})
 
-        const tbody = document.querySelector('#agenda-table tbody');
-        items.forEach(item => {
-          const awayTeam = item.cnf_team || item.otm;
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${item.kls}</td>
-            <td>${item.sta_team}</td>
-            <td>${awayTeam}</td>
-            <td>${item.sco}</td>
-          `;
-          tbody.appendChild(row);
-        });
-      })
       .catch(error => {
         console.error('Fout bij ophalen van agenda:', error);
       });
