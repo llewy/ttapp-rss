@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smash '70 Wedstrijdschema</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, rgba(0, 91, 172, 0.9), rgba(0, 123, 255, 0.9)),
+        url('https://smash70.com/wp-content/uploads/2023/09/R188174-bewerkt-scaled.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem 1rem;
+      min-height: 100vh;
+      font-size: 1rem;
+    }
+    .table-container {
+      width: 100%;
+      max-width: 1000px;
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      overflow-x: auto;
+      padding: 1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1rem;
+      color: white;
+      min-width: 600px;
+    }
+    th, td {
+      padding: 10px 14px;
+      text-align: left;
+    }
+    th {
+      font-weight: 600;
+      font-size: 1.1rem;
+      border-bottom: 2px solid white;
+    }
+    td {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    tr:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    strong {
+      color: #FFD700;
+      font-weight: bold;
+    }
+    @media (max-width: 768px) {
+      body { padding: 1rem; font-size: 0.95rem; }
+      .table-container { padding: 0.5rem; }
+      table { font-size: 0.95rem; }
+      th, td { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Wedstrijden eredivisie</h1>
+  </header>
+  <div class="table-container">
+    <table id="schedule-table">
+      <thead>
+        <tr>
+          <th>Datum</th>
+          <th>Tijd</th>
+          <th>Thuisteam</th>
+          <th>Uitteam</th>
+          <th>Uitslag</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <footer>
+    <p></p>
+  </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      fetch('https://www.nttb-ranglijsten.nl/dwf/v2/?get_wcomp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+          scope: '0',
+          pID: '1022898', // Vervang door de juiste poule-ID indien nodig
+          jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjAifQ.iEZheZoeSXMJe20oTxlelrXPCxD-lM2nPtSJAlWwrZA',
+          username: '0'
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        const poule = JSON.parse(data.poule);
+        const smash70Matches = poule.filter(item =>
+          (item.htm && item.htm.includes("Smash '70")) ||
+          (item.otm && item.otm.includes("Smash '70"))
+        );
+        const highlight = team =>
+          team.replace(/van Wijnen\/Smash '70 1/g, "<strong>van Wijnen/Smash '70 1</strong>");
+        const tbody = document.querySelector('#schedule-table tbody');
+        smash70Matches.forEach(item => {
+          const [datum, tijd] = item.date.split(' ');
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${datum}</td>
+            <td>${tijd}</td>
+            <td>${highlight(item.htm)}</td>
+            <td>${highlight(item.otm)}</td>
+            <td>${item.score || item.sco || ""}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      })
+      .catch(error => {
+        console.error('Fout bij ophalen van poule:', error);
+      });
+    });
+  </script>
+</body>
+</html>
