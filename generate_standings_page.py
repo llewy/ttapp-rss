@@ -92,18 +92,17 @@ CSS_STYLE = """
 def get_standings_from_nttb(url):
     response = requests.get(url)
     response.raise_for_status()
-
     soup = BeautifulSoup(response.text, "html.parser")
     table = soup.find("table")
     standings = []
 
-    rows = table.find_all("tr")[1:]  # Skip header row
+    rows = table.find_all("tr")
     for row in rows:
         cols = row.find_all("td")
         if len(cols) >= 5:
-            team = cols[1].text.strip()
-            played = cols[2].text.strip()
-            points = cols[4].text.strip()
+            team = cols[1].get_text(strip=True)
+            played = cols[2].get_text(strip=True)
+            points = cols[4].get_text(strip=True)
             standings.append((team, played, points))
 
     return standings
