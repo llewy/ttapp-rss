@@ -30,7 +30,7 @@ CSS_STYLE = """
 
   header {
     text-align: center;
-    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-size: clamp(2.25rem, 3.6vw, 3.6rem);
     font-weight: 800;
     margin-bottom: 2rem;
     color: white;
@@ -38,28 +38,28 @@ CSS_STYLE = """
 
   .table-container {
     width: 100%;
-    max-width: 1000px;
+    max-width: 900px;
     overflow-x: auto;
     background: rgba(0, 0, 0, 0.4);
-    padding: 1rem;
+    padding: 0.9rem;
     border-radius: 12px;
   }
 
   table {
     width: 100%;
     border-collapse: collapse;
-    font-size: clamp(1.2rem, 2vw, 2rem);
+    font-size: clamp(1.08rem, 1.8vw, 1.8rem);
     color: white;
   }
 
   th, td {
-    padding: 1rem;
+    padding: 0.9rem;
     text-align: left;
   }
 
   th {
     font-weight: 700;
-    font-size: 1.4em;
+    font-size: 1.26em;
     border-bottom: 2px solid white;
   }
 
@@ -74,20 +74,21 @@ CSS_STYLE = """
   footer {
     margin-top: 2rem;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.7);
   }
 
   @media (max-width: 768px) {
     .table-container {
-      padding: 0.5rem;
+      padding: 0.45rem;
     }
 
     th, td {
-      padding: 0.5rem;
+      padding: 0.45rem;
     }
   }
 """
+
 
 def get_standings_from_nttb(url):
     response = requests.get(url)
