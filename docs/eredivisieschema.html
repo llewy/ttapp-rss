@@ -2,11 +2,14 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=1280, height=720, initial-scale=1.0" />
   <title>Smash '70 Wedstrijdschema</title>
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, rgba(0, 91, 172, 0.9), rgba(0, 123, 255, 0.9)),
         url('https://smash70.com/wp-content/uploads/2023/09/R188174-bewerkt-scaled.jpg') no-repeat center center fixed;
@@ -14,37 +17,44 @@
       color: white;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding: 1.5rem 1rem;
-      min-height: 100vh;
-      font-size: 1rem;
+    }
+
+    header {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin: 1rem 0;
+      flex: 0 0 auto;
     }
 
     .table-container {
-      width: 100%;
-      max-width: 1000px;
+      flex: 1 1 auto;
+      width: 95%;
+      max-width: 1200px;
       background-color: rgba(0, 0, 0, 0.3);
       border-radius: 12px;
-      overflow-x: auto;
-      padding: 1rem;
+      overflow-y: auto;
+      padding: 0.8rem;
+      box-sizing: border-box;
+      margin: 0 auto 1rem auto;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       color: white;
       min-width: 600px;
     }
 
     th, td {
-      padding: 12px 17px;
+      padding: 10px 16px;
       text-align: left;
     }
 
     th {
-      font-weight: 600;
-      font-size: 1.32rem;
+      font-weight: 700;
+      font-size: 1.5rem;
       border-bottom: 2px solid white;
     }
 
@@ -57,57 +67,34 @@
     }
 
     tr:hover {
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .next-match {
+      flex: 0 0 auto;
+      background-color: rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 0.5rem 1rem;
+      width: 95%;
+      max-width: 1200px;
+      margin: 0 auto 1rem auto;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    .next-match h2 {
+      font-size: 2.2rem;
+      margin: 0.5rem 0 1rem 0;
+    }
+
+    #next-home-match-info {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin: 0;
     }
 
     strong {
       font-weight: bold;
-    }
-
-    @media (max-width: 768px) {
-      body { padding: 1rem; font-size: 0.95rem; }
-      .table-container { padding: 0.5rem; }
-      table { font-size: 1.1rem; }
-      th, td { padding: 10px 14px; }
-    }
-
-    header {
-      text-align: center;
-      font-size: clamp(2.25rem, 3.6vw, 3.6rem);
-      font-weight: 800;
-      margin-bottom: 2rem;
-      color: white;
-    }
-
-.next-match {
-  margin-top: 2rem;
-  /* padding: 0.5rem 0.5rem; */
-    padding-top: 0.5rem;  /* minder bovenruimte */
-  padding-bottom: 0.5rem; /* minder onderruimte */
-  background-color: rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  text-align: center;
-  width: 100%;
-  max-width: 1200px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
-
-    }
-
-    .next-match h2 {
-      text-align: center;
-      font-size: clamp(2.25rem, 3.6vw, 3.6rem);
-      font-weight: 800;
-      margin-bottom: 2rem;
-      color: white;
-    }
-
-    #next-home-match-info {
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
-      font-weight: 600;
-      color: #fff;
-      line-height: 1.4;
-      margin-top: 0; /* verwijdert eventuele marge boven de tekst */
-  padding-top: 0; /* verwijdert eventuele padding boven de tekst */
     }
   </style>
 </head>
@@ -129,13 +116,10 @@
     </table>
   </div>
 
-  <!-- Eerstvolgende thuiswedstrijd zonder countdown -->
   <div class="next-match" id="next-home-match">
     <h2>Eerstvolgende thuiswedstrijd</h2>
     <p id="next-home-match-info">Laden...</p>
   </div>
-
-  <footer><p></p></footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -146,7 +130,7 @@
         },
         body: new URLSearchParams({
           scope: '0',
-          pID: '1022898', // Indien van toepassing, vervang met juiste ID
+          pID: '1022898',
           jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjAifQ.iEZheZoeSXMJe20oTxlelrXPCxD-lM2nPtSJAlWwrZA',
           username: '0'
         })
@@ -175,11 +159,8 @@
           tbody.appendChild(row);
         });
 
-        // Eerstvolgende thuiswedstrijd tonen
         const upcomingHomeMatches = smash70Matches
-          .filter(item =>
-            item.htm.includes("Smash '70") && !item.score
-          )
+          .filter(item => item.htm.includes("Smash '70") && !item.score)
           .sort((a, b) => new Date(a.date) - new Date(b.date));
 
         const infoDiv = document.getElementById('next-home-match-info');
