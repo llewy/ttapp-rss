@@ -53,7 +53,7 @@
       background-color: rgba(255, 255, 255, 0.1);
     }
     strong {
-      color: #FFD700;
+      /* color: #FFD700; */
       font-weight: bold;
     }
     @media (max-width: 768px) {
@@ -62,11 +62,18 @@
       table { font-size: 1.1rem; } /* ook hier iets groter */
       th, td { padding: 10px 14px; }
     }
+      header {
+    text-align: center;
+    font-size: clamp(2.25rem, 3.6vw, 3.6rem);
+    font-weight: 800;
+    margin-bottom: 2rem;
+    color: white;
+  }
   </style>
 </head>
 <body>
   <header>
-    <h1>Wedstrijden eredivisie</h1>
+    Wedstrijden Eredivisie
   </header>
   <div class="table-container">
     <table id="schedule-table">
