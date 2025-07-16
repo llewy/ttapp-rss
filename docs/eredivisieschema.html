@@ -79,15 +79,18 @@
       color: white;
     }
 
-    .next-match {
-      margin-top: 2rem;
-      padding: 0.5rem;
-      background-color: rgba(255, 255, 255, 0.15);
-      border-radius: 12px;
-      text-align: center;
-      width: 100%;
-      max-width: 1200px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+.next-match {
+  margin-top: 2rem;
+  /* padding: 0.5rem 0.5rem; */
+    padding-top: 0.5rem;  /* minder bovenruimte */
+  padding-bottom: 0.5rem; /* minder onderruimte */
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  text-align: center;
+  width: 100%;
+  max-width: 1200px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+
     }
 
     .next-match h2 {
@@ -103,6 +106,8 @@
       font-weight: 600;
       color: #fff;
       line-height: 1.4;
+      margin-top: 0; /* verwijdert eventuele marge boven de tekst */
+  padding-top: 0; /* verwijdert eventuele padding boven de tekst */
     }
   </style>
 </head>
