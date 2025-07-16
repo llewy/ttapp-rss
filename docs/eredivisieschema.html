@@ -19,6 +19,7 @@
       min-height: 100vh;
       font-size: 1rem;
     }
+
     .table-container {
       width: 100%;
       max-width: 1000px;
@@ -27,54 +28,87 @@
       overflow-x: auto;
       padding: 1rem;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 1.2rem; /* Vergroot met 20% */
+      font-size: 1.2rem;
       color: white;
       min-width: 600px;
     }
+
     th, td {
-      padding: 12px 17px; /* Vergroot met 20% */
+      padding: 12px 17px;
       text-align: left;
     }
+
     th {
       font-weight: 600;
-      font-size: 1.32rem; /* Vergroot met 20% */
+      font-size: 1.32rem;
       border-bottom: 2px solid white;
     }
+
     td {
       border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     }
+
     tr:last-child td {
       border-bottom: none;
     }
+
     tr:hover {
       background-color: rgba(255, 255, 255, 0.1);
     }
+
     strong {
-      /* color: #FFD700; */
       font-weight: bold;
     }
+
     @media (max-width: 768px) {
       body { padding: 1rem; font-size: 0.95rem; }
       .table-container { padding: 0.5rem; }
-      table { font-size: 1.1rem; } /* ook hier iets groter */
+      table { font-size: 1.1rem; }
       th, td { padding: 10px 14px; }
     }
-      header {
-    text-align: center;
-    font-size: clamp(2.25rem, 3.6vw, 3.6rem);
-    font-weight: 800;
-    margin-bottom: 2rem;
-    color: white;
-  }
+
+    header {
+      text-align: center;
+      font-size: clamp(2.25rem, 3.6vw, 3.6rem);
+      font-weight: 800;
+      margin-bottom: 2rem;
+      color: white;
+    }
+
+    .next-match {
+      margin-top: 2rem;
+      padding: 0.5rem;
+      background-color: rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      text-align: center;
+      width: 100%;
+      max-width: 1200px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    .next-match h2 {
+      text-align: center;
+      font-size: clamp(2.25rem, 3.6vw, 3.6rem);
+      font-weight: 800;
+      margin-bottom: 2rem;
+      color: white;
+    }
+
+    #next-home-match-info {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.4;
+    }
   </style>
 </head>
 <body>
-  <header>
-    Wedstrijden Eredivisie
-  </header>
+  <header>Wedstrijden Eredivisie</header>
+
   <div class="table-container">
     <table id="schedule-table">
       <thead>
@@ -89,9 +123,15 @@
       <tbody></tbody>
     </table>
   </div>
-  <footer>
-    <p></p>
-  </footer>
+
+  <!-- Eerstvolgende thuiswedstrijd zonder countdown -->
+  <div class="next-match" id="next-home-match">
+    <h2>Eerstvolgende thuiswedstrijd</h2>
+    <p id="next-home-match-info">Laden...</p>
+  </div>
+
+  <footer><p></p></footer>
+
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       fetch('https://www.nttb-ranglijsten.nl/dwf/v2/?get_wcomp', {
@@ -101,7 +141,7 @@
         },
         body: new URLSearchParams({
           scope: '0',
-          pID: '1022898', // Vervang door de juiste poule-ID indien nodig
+          pID: '1022898', // Indien van toepassing, vervang met juiste ID
           jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjAifQ.iEZheZoeSXMJe20oTxlelrXPCxD-lM2nPtSJAlWwrZA',
           username: '0'
         })
@@ -116,6 +156,7 @@
         const highlight = team =>
           team.replace(/van Wijnen\/Smash '70 1/g, "<strong>van Wijnen/Smash '70 1</strong>");
         const tbody = document.querySelector('#schedule-table tbody');
+
         smash70Matches.forEach(item => {
           const [datum, tijd] = item.date.split(' ');
           const row = document.createElement('tr');
@@ -128,9 +169,31 @@
           `;
           tbody.appendChild(row);
         });
+
+        // Eerstvolgende thuiswedstrijd tonen
+        const upcomingHomeMatches = smash70Matches
+          .filter(item =>
+            item.htm.includes("Smash '70") && !item.score
+          )
+          .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+        const infoDiv = document.getElementById('next-home-match-info');
+
+        if (upcomingHomeMatches.length > 0) {
+          const next = upcomingHomeMatches[0];
+          const [datum, tijd] = next.date.split(' ');
+          const opponent = next.otm;
+
+          infoDiv.innerHTML = `
+            <strong>${opponent}</strong> op <strong>${datum}</strong> om <strong>${tijd}</strong>
+          `;
+        } else {
+          infoDiv.textContent = 'Geen aankomende thuiswedstrijd gevonden.';
+        }
       })
       .catch(error => {
         console.error('Fout bij ophalen van poule:', error);
+        document.getElementById('next-home-match-info').textContent = 'Fout bij laden wedstrijden.';
       });
     });
   </script>
