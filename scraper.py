@@ -151,6 +151,18 @@ def generate_html(players):
           font-weight: bold;
         }}
 
+        .footer-note {
+        margin-top: 1.5rem;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        text-align: center;
+        font-style: italic;
+      }
+      .footer-note a {
+        color: rgba(200, 220, 255, 0.9);
+        text-decoration: underline;
+      }
+
         @media (max-width: 768px) {{
           .table-container {{
             padding: 0.5rem;
@@ -192,6 +204,11 @@ def generate_html(players):
         </table>
       </div>
 
+    <div class="footer-note">
+    Dit is de officiële rating zoals gepubliceerd op 
+    <a href="https://nttb-ranglijsten.nl" target="_blank" rel="noopener noreferrer">nttb-ranglijsten.nl</a>.
+    Het verschilgetal is de winst of het verlies ten opzichte van het einde van vorig seizoen.
+  </div>
     </body>
     </html>
     """
