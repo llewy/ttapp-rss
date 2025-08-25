@@ -151,17 +151,17 @@ def generate_html(players):
           font-weight: bold;
         }}
 
-        .footer-note {
+        .footer-note {{
         margin-top: 1.5rem;
         font-size: 0.9rem;
         color: rgba(255, 255, 255, 0.7);
         text-align: center;
         font-style: italic;
-      }
-      .footer-note a {
+      }}
+      .footer-note a {{
         color: rgba(200, 220, 255, 0.9);
         text-decoration: underline;
-      }
+      }}
 
         @media (max-width: 768px) {{
           .table-container {{
