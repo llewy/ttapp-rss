@@ -1,0 +1,158 @@
+
+    <!DOCTYPE html>
+    <html lang="nl">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Grootste stijgers in rating</title>
+      <style>
+        *, *::before, *::after {
+          box-sizing: border-box;
+        }
+
+        html, body {
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          height: 100%;
+        }
+
+        body {
+          display: grid;
+          place-items: center;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background: linear-gradient(rgba(10, 30, 60, 0.85), rgba(10, 30, 60, 0.85)),
+                      url('https://smash70.com/wp-content/uploads/2024/04/Kidspong-3.jpg') no-repeat center center fixed;
+          background-size: cover;
+          color: white;
+          padding: 2rem;
+        }
+
+        .title {
+          text-align: center;
+          font-size: clamp(2.5rem, 4vw, 4rem);
+          font-weight: 800;
+          margin-bottom: 2rem;
+          color: white;
+        }
+
+        .table-container {
+          width: 100%;
+          max-width: 1000px;
+          overflow-x: auto;
+          background: rgba(0, 0, 0, 0.4);
+          padding: 1rem;
+          border-radius: 12px;
+        }
+
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          font-size: clamp(1.2rem, 2vw, 2rem);
+          color: white;
+        }
+
+        th, td {
+          padding: 1rem;
+          text-align: left;
+        }
+
+        th {
+          font-weight: 700;
+          font-size: 1.4em;
+          border-bottom: 2px solid white;
+        }
+
+        td {
+          border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        tr:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .improvement {
+          color: #00ff88;
+          font-weight: bold;
+        }
+
+        .footer-note {
+        margin-top: 1.5rem;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        text-align: center;
+        font-style: italic;
+      }
+      .footer-note a {
+        color: rgba(200, 220, 255, 0.9);
+        text-decoration: underline;
+      }
+
+        @media (max-width: 768px) {
+          .table-container {
+            padding: 0.5rem;
+          }
+
+          th, td {
+            padding: 0.5rem;
+          }
+        }
+      </style>
+    </head>
+    <body>
+
+      <div class="title">Grootste stijgers in rating</div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Naam</th>
+              <th>Huidige rating</th>
+              <th>Verbetering</th>
+            </tr>
+          </thead>
+          <tbody>
+    
+            <tr>
+              <td>Lukas Bosbach</td>
+              <td>2381.00</td>
+              <td class="improvement">+10.00</td>
+            </tr>
+        
+            <tr>
+              <td>Martijn de Vries</td>
+              <td>2257.00</td>
+              <td class="improvement">+0.00</td>
+            </tr>
+        
+            <tr>
+              <td>Gerben Last</td>
+              <td>2146.00</td>
+              <td class="improvement">+0.00</td>
+            </tr>
+        
+            <tr>
+              <td>Chris Verwoert</td>
+              <td>2108.00</td>
+              <td class="improvement">+0.00</td>
+            </tr>
+        
+            <tr>
+              <td>Anniek van 't Holt</td>
+              <td>1663.00</td>
+              <td class="improvement">+0.00</td>
+            </tr>
+        
+          </tbody>
+        </table>
+      </div>
+
+    <div class="footer-note">
+    Dit is de officiële rating zoals gepubliceerd op 
+    <a href="https://nttb-ranglijsten.nl" target="_blank" rel="noopener noreferrer">nttb-ranglijsten.nl</a>.
+    Het verschilgetal is de winst of het verlies ten opzichte van het einde van vorig seizoen.
+  </div>
+    </body>
+    </html>
+    
