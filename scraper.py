@@ -194,8 +194,8 @@ def generate_html(players):
         html_content += f"""
             <tr>
               <td>{name}</td>
-              <td>{rating:.2f}</td>
-              <td class="improvement">+{diff:.2f}</td>
+              <td>{rating:.0f}</td>
+              <td class="improvement">+{diff:.0f}</td>
             </tr>
         """
 
@@ -230,7 +230,7 @@ def main():
 
     print(f"Top {TOP_N} improvers:")
     for name, rating, diff in top_improvers:
-        print(f"- {name}: +{diff:.2f} (Now {rating:.2f})")
+        print(f"- {name}: +{diff:.2f} (Now {rating:.0f})")
 
     print("Generating html...")
     generate_html(top_improvers)
