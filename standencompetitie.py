@@ -147,7 +147,7 @@ def generate_combined_html(results):
   <style>{CSS_STYLE}</style>
 </head>
 <body>
-  <div class="title">Samengevoegde Standen van Smash '70 Teams</div>
+  <div class="title">Competitiestand per team</div>
   <div class="table-wrapper">
     <table>
       <thead>
@@ -163,7 +163,7 @@ def generate_combined_html(results):
     </table>
   </div>
   <div class="footer-note">
-    Bron: <a href="https://nttb-ranglijsten.nl" target="_blank" rel="noopener noreferrer">nttb-ranglijsten.nl</a>
+    Dagelijks ververst. Bron: <a href="https://nttb-ranglijsten.nl" target="_blank" rel="noopener noreferrer">nttb-ranglijsten.nl</a>
   </div>
 </body>
 </html>"""
