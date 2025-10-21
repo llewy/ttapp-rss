@@ -5,54 +5,106 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Samengevoegde Standen Smash '70</title>
   <style>
+*, *::before, *::after { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
 body {
+  display: grid;
+  place-items: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #003b7d;
+  background: linear-gradient(rgba(10,30,60,0.85), rgba(10,30,60,0.85)), url('https://smash70.com/wp-content/uploads/2024/04/Kidspong-3.jpg') no-repeat center center fixed;
+  background-size: cover;
   color: white;
-  padding: 2rem;
+  padding: 0.5rem;
+}
+.title {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+.table-wrapper {
+  width: 100%;
+  max-width: 550px;
+  overflow-x: auto;
+  background: rgba(0,0,0,0.4);
+  padding: 0.4rem;
+  border-radius: 10px;
 }
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 1.2rem;
+  font-size: 0.68rem;
+  color: white;
+  min-width: 450px;
 }
 th, td {
-  padding: 0.8rem;
-  border: 1px solid white;
+  padding: 0.18rem 0.35rem;
   text-align: left;
 }
 th {
-  background-color: #0059a3;
+  font-weight: 700;
+  font-size: 0.85em;
+  border-bottom: 2px solid #FFF;
+  background: rgba(10,30,60,0.75);
 }
-tr:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.1);
+td {
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+tr:nth-child(even) { background-color: rgba(255,255,255,0.07); }
+tr:nth-child(odd)  { background-color: rgba(0,0,0,0.07); }
+tr:hover { background-color: rgba(255,255,255,0.16); }
+.footer-note {
+  margin-top: 0.6rem;
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+  font-style: italic;
+}
+.footer-note a {
+  color: #b0d0ff;
+  text-decoration: underline;
+}
+@media (max-width: 500px) {
+  .title { font-size: 1rem; }
+  .table-wrapper { max-width: 100vw; min-width: 0; }
+  th, td { padding: 0.11rem 0.11rem; font-size: 0.54rem; }
 }
 </style>
 </head>
 <body>
-  <h1>Samengevoegde Standen van Smash '70 Teams</h1>
-  <table>
-    <thead>
-      <tr><th>Groep</th><th>Team</th><th>Positie</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Landelijk - Senioren Eredivisie</td><td>van Wijnen/Smash '70 1</td><td>5e</td></tr>
-      <tr><td>Landelijk - Jeugd</td><td>Smash '70 (H) 1</td><td>1e</td></tr>
-      <tr><td>Oost - Senioren</td><td>Smash '70 (H) 2</td><td>5e</td></tr>
-      <tr><td>Oost - Senioren</td><td>Smash '70 (H) 3</td><td>1e</td></tr>
-      <tr><td>Oost - Senioren</td><td>Smash '70 (H) 4</td><td>5e</td></tr>
-      <tr><td>Oost - Senioren</td><td>Smash '70 (H) 5</td><td>3e</td></tr>
-      <tr><td>Oost - Senioren</td><td>Smash '70 (H) 6</td><td>3e</td></tr>
-      <tr><td>Oost - Senioren Duo</td><td>Smash '70 (H) 1</td><td>4e</td></tr>
-      <tr><td>Oost - Senioren Duo</td><td>Smash '70 (H) 2</td><td>6e</td></tr>
-      <tr><td>Oost - Senioren Duo</td><td>Smash '70 (H) 3</td><td>4e</td></tr>
-      <tr><td>Oost - Senioren Duo</td><td>Smash '70 (H) 4</td><td>4e</td></tr>
-      <tr><td>Oost - Senioren Duo</td><td>Smash '70 (H) 5</td><td>1e</td></tr>
-      <tr><td>Oost - Jeugd</td><td>Smash '70 (H) 2</td><td>6e</td></tr>
-      <tr><td>Oost - Jeugd</td><td>Smash '70 (H) 3</td><td>5e</td></tr>
-      <tr><td>Oost - Jeugd</td><td>Smash '70 (H) 4</td><td>4e</td></tr>
-    </tbody>
-  </table>
-  <footer>Bron: nttb-ranglijsten.nl</footer>
+  <div class="title">Samengevoegde Standen van Smash '70 Teams</div>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr><th>Groep</th><th>Team</th><th>Positie</th></tr>
+      </thead>
+      <tbody>
+<tr><td>Landelijk - Senioren Eredivisie</td><td>van Wijnen/Smash '70 1</td><td>5e</td></tr>
+<tr><td>Landelijk - Jeugd</td><td>Smash '70 (H) 1</td><td>1e</td></tr>
+<tr><td>Oost - Senioren</td><td>Smash '70 (H) 2</td><td>5e</td></tr>
+<tr><td>Oost - Senioren</td><td>Smash '70 (H) 3</td><td>1e</td></tr>
+<tr><td>Oost - Senioren</td><td>Smash '70 (H) 4</td><td>5e</td></tr>
+<tr><td>Oost - Senioren</td><td>Smash '70 (H) 5</td><td>3e</td></tr>
+<tr><td>Oost - Senioren</td><td>Smash '70 (H) 6</td><td>3e</td></tr>
+<tr><td>Oost - Senioren Duo</td><td>Smash '70 (H) 1</td><td>4e</td></tr>
+<tr><td>Oost - Senioren Duo</td><td>Smash '70 (H) 2</td><td>6e</td></tr>
+<tr><td>Oost - Senioren Duo</td><td>Smash '70 (H) 3</td><td>4e</td></tr>
+<tr><td>Oost - Senioren Duo</td><td>Smash '70 (H) 4</td><td>4e</td></tr>
+<tr><td>Oost - Senioren Duo</td><td>Smash '70 (H) 5</td><td>1e</td></tr>
+<tr><td>Oost - Jeugd</td><td>Smash '70 (H) 2</td><td>6e</td></tr>
+<tr><td>Oost - Jeugd</td><td>Smash '70 (H) 3</td><td>5e</td></tr>
+<tr><td>Oost - Jeugd</td><td>Smash '70 (H) 4</td><td>4e</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="footer-note">
+    Bron: <a href="https://nttb-ranglijsten.nl" target="_blank" rel="noopener noreferrer">nttb-ranglijsten.nl</a>
+  </div>
 </body>
 </html>

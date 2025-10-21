@@ -27,40 +27,85 @@ BASE_URL = "https://www.nttb-ranglijsten.nl/stand_frame.php?pID="
 OUTPUT_FILE = "docs/combined_standings.html"
 
 CSS_STYLE = """
+*, *::before, *::after { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
 body {
+  display: grid;
+  place-items: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #003b7d;
+  background: linear-gradient(rgba(10,30,60,0.85), rgba(10,30,60,0.85)), url('https://smash70.com/wp-content/uploads/2024/04/Kidspong-3.jpg') no-repeat center center fixed;
+  background-size: cover;
   color: white;
-  padding: 2rem;
+  padding: 0.5rem;
+}
+.title {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+.table-wrapper {
+  width: 100%;
+  max-width: 550px;
+  overflow-x: auto;
+  background: rgba(0,0,0,0.4);
+  padding: 0.4rem;
+  border-radius: 10px;
 }
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 1.2rem;
+  font-size: 0.68rem;
+  color: white;
+  min-width: 450px;
 }
 th, td {
-  padding: 0.8rem;
-  border: 1px solid white;
+  padding: 0.18rem 0.35rem;
   text-align: left;
 }
 th {
-  background-color: #0059a3;
+  font-weight: 700;
+  font-size: 0.85em;
+  border-bottom: 2px solid #FFF;
+  background: rgba(10,30,60,0.75);
 }
-tr:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.1);
+td {
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+tr:nth-child(even) { background-color: rgba(255,255,255,0.07); }
+tr:nth-child(odd)  { background-color: rgba(0,0,0,0.07); }
+tr:hover { background-color: rgba(255,255,255,0.16); }
+.footer-note {
+  margin-top: 0.6rem;
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+  font-style: italic;
+}
+.footer-note a {
+  color: #b0d0ff;
+  text-decoration: underline;
+}
+@media (max-width: 500px) {
+  .title { font-size: 1rem; }
+  .table-wrapper { max-width: 100vw; min-width: 0; }
+  th, td { padding: 0.11rem 0.11rem; font-size: 0.54rem; }
 }
 """
+
 
 def get_pids_and_groups_from_api():
     response = requests.post(API_URL, headers=HEADERS, data=POST_DATA)
     response.raise_for_status()
     data = response.json()
-
-    # Extract 'teams' JSON string and parse it
     teams_json_str = data.get("teams", "[]")
     teams = json.loads(teams_json_str)
-
-    # Extract pID and group_name for each team entry
     pid_group_list = []
     for team in teams:
         pid = team.get("pID")
@@ -74,24 +119,10 @@ def fetch_standings_and_group(pID):
     response = requests.get(url)
     response.raise_for_status()
     soup = BeautifulSoup(response.text, "html.parser")
-
-    # Extract group name from page, fallback to unknown
-    group_name = "Onbekende Groep"
-    b_tag = soup.find("b")
-    if b_tag and b_tag.get_text(strip=True):
-        group_name = b_tag.get_text(strip=True)
-    else:
-        for tag_name in ["h1", "h2", "h3", "p"]:
-            tag = soup.find(tag_name)
-            if tag and tag.get_text(strip=True):
-                group_name = tag.get_text(strip=True)
-                break
-
     table = soup.find("table")
     results = []
     if not table:
-        return group_name, results
-
+        return results
     position = 0
     rows = table.find_all("tr")
     for row in rows:
@@ -101,10 +132,10 @@ def fetch_standings_and_group(pID):
             team = cols[1].get_text(strip=True)
             if "Smash '70" in team:
                 results.append((position, team))
-    return group_name, results
+    return results
 
 def format_position(pos):
-    return f"{pos}e"  # Dutch ordinal suffix
+    return f"{pos}e"
 
 def generate_combined_html(results):
     html = f"""<!DOCTYPE html>
@@ -116,20 +147,24 @@ def generate_combined_html(results):
   <style>{CSS_STYLE}</style>
 </head>
 <body>
-  <h1>Samengevoegde Standen van Smash '70 Teams</h1>
-  <table>
-    <thead>
-      <tr><th>Groep</th><th>Team</th><th>Positie</th></tr>
-    </thead>
-    <tbody>
+  <div class="title">Samengevoegde Standen van Smash '70 Teams</div>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr><th>Groep</th><th>Team</th><th>Positie</th></tr>
+      </thead>
+      <tbody>
 """
 
     for groep, team, positie in results:
-        html += f"      <tr><td>{groep}</td><td>{team}</td><td>{positie}</td></tr>\n"
+        html += f"<tr><td>{groep}</td><td>{team}</td><td>{positie}</td></tr>\n"
 
-    html += """    </tbody>
-  </table>
-  <footer>Bron: nttb-ranglijsten.nl</footer>
+    html += """      </tbody>
+    </table>
+  </div>
+  <div class="footer-note">
+    Bron: <a href="https://nttb-ranglijsten.nl" target="_blank" rel="noopener noreferrer">nttb-ranglijsten.nl</a>
+  </div>
 </body>
 </html>"""
 
@@ -144,19 +179,14 @@ def main():
     if not pid_group_list:
         print("No pIDs found from the API.")
         return
-    print(f"Found pIDs and groups: {pid_group_list}")
-
-    consolidated_results = []
-    for pID, groep_from_api in pid_group_list:
-        print(f"Fetching standings for pID {pID} with expected group '{groep_from_api}' ...")
-        groep_page, smash_teams = fetch_standings_and_group(pID)
-        # Use group from API for consistency, but can fallback or compare with page group
-        groep = groep_from_api or groep_page
+    results = []
+    for pID, groep in pid_group_list:
+        print(f"Fetching standings for pID {pID} ({groep})...")
+        smash_teams = fetch_standings_and_group(pID)
         for pos, team in smash_teams:
-            consolidated_results.append((groep, team, format_position(pos)))
-
-    if consolidated_results:
-        generate_combined_html(consolidated_results)
+            results.append((groep, team, format_position(pos)))
+    if results:
+        generate_combined_html(results)
     else:
         print("No Smash '70 team standings found.")
 
