@@ -17,7 +17,7 @@ HEADERS = {
 }
 POST_DATA = {
     "user": "0",
-    "comp": "2025_2",
+    "comp": "2026_1",
     "club": "1603",
     "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjAifQ.iEZheZoeSXMJe20oTxlelrXPCxD-lM2nPtSJAlWwrZA",
     "username": "0"
