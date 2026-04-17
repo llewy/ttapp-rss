@@ -7,7 +7,7 @@ import os
 import time
 
 CLUB_URL = "https://ttapp.nl/#/club/1603/p"
-TOP_N = 5
+TOP_N = 10
 SCREENSHOT_FILE = "debug_screenshot.png"
 
 def get_player_data():
@@ -100,50 +100,56 @@ def generate_html(players):
                       url('https://smash70.com/wp-content/uploads/2024/04/Kidspong-3.jpg') no-repeat center center fixed;
           background-size: cover;
           color: white;
-          padding: 2rem;
+          padding: 1.5rem;
         }}
 
         .title {{
           text-align: center;
-          font-size: clamp(2.5rem, 4vw, 4rem);
+          font-size: clamp(2rem, 3vh, 3rem);
           font-weight: 800;
-          margin-bottom: 2rem;
-          color: white;
+          margin-bottom: 1rem;
         }}
 
         .table-container {{
           width: 100%;
           max-width: 1000px;
-          overflow-x: auto;
+          height: 70vh; /* 👈 keeps table within screen */
           background: rgba(0, 0, 0, 0.4);
-          padding: 1rem;
+          padding: 0.8rem;
           border-radius: 12px;
+          display: flex;
+          align-items: center;
         }}
 
         table {{
           width: 100%;
+          height: 100%;
           border-collapse: collapse;
-          font-size: clamp(1.2rem, 2vw, 2rem);
+          font-size: clamp(0.9rem, 1.5vh, 1.4rem);
           color: white;
         }}
 
         th, td {{
-          padding: 1rem;
+          padding: 0.5rem 0.6rem;
           text-align: left;
         }}
 
         th {{
           font-weight: 700;
-          font-size: 1.4em;
+          font-size: 1.1em;
           border-bottom: 2px solid white;
         }}
 
         td {{
-          border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }}
+
+        tr {{
+          height: calc(100% / 11); /* 👈 10 rows + header */
         }}
 
         tr:hover {{
-          background-color: rgba(255, 255, 255, 0.1);
+          background-color: rgba(255, 255, 255, 0.08);
         }}
 
         .improvement {{
@@ -152,24 +158,21 @@ def generate_html(players):
         }}
 
         .footer-note {{
-        margin-top: 1.5rem;
-        font-size: 0.9rem;
-        color: rgba(255, 255, 255, 0.7);
-        text-align: center;
-        font-style: italic;
-      }}
-      .footer-note a {{
-        color: rgba(200, 220, 255, 0.9);
-        text-decoration: underline;
-      }}
+          margin-top: 1rem;
+          font-size: 0.8rem;
+          color: rgba(255, 255, 255, 0.7);
+          text-align: center;
+          font-style: italic;
+        }}
+
+        .footer-note a {{
+          color: rgba(200, 220, 255, 0.9);
+          text-decoration: underline;
+        }}
 
         @media (max-width: 768px) {{
-          .table-container {{
-            padding: 0.5rem;
-          }}
-
-          th, td {{
-            padding: 0.5rem;
+          .title {{
+            font-size: 1.5rem;
           }}
         }}
       </style>
@@ -204,11 +207,12 @@ def generate_html(players):
         </table>
       </div>
 
-    <div class="footer-note">
-    Dit is de officiële rating zoals gepubliceerd op 
-    <a href="https://nttb-ranglijsten.nl" target="_blank" rel="noopener noreferrer">nttb-ranglijsten.nl</a>.
-    Het verschilgetal is de winst of het verlies ten opzichte van het einde van vorig seizoen.
-  </div>
+      <div class="footer-note">
+        Dit is de officiële rating zoals gepubliceerd op 
+        <a href="https://nttb-ranglijsten.nl" target="_blank">nttb-ranglijsten.nl</a>.
+        Het verschilgetal is de winst of het verlies ten opzichte van het einde van vorig seizoen.
+      </div>
+
     </body>
     </html>
     """
