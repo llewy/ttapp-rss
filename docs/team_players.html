@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="300">
+  <title>Teamleden Smash '70</title>
+  <style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, rgba(0, 91, 172, 0.9), rgba(0, 123, 255, 0.9)),
+                url('https://smash70.com/wp-content/uploads/2023/09/R188174-bewerkt-scaled.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    padding: 2rem 1rem;
+  }
+
+  header {
+    text-align: center;
+    font-size: clamp(1.8rem, 3vw, 3rem);
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: white;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .group-section {
+    width: 100%;
+    max-width: 900px;
+    margin-bottom: 2.5rem;
+  }
+
+  .group-title {
+    font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    color: white;
+    padding-left: 0.2rem;
+  }
+
+  .team-name {
+    font-size: clamp(0.95rem, 1.3vw, 1.2rem);
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    margin-top: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    padding-left: 0.2rem;
+  }
+
+  .table-container {
+    width: 100%;
+    overflow-x: auto;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 0.6rem;
+    border-radius: 12px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+    color: white;
+  }
+
+  th, td {
+    padding: 0.4rem 0.6rem;
+    text-align: left;
+  }
+
+  th {
+    font-weight: 700;
+    font-size: 1.05em;
+    border-bottom: 2px solid white;
+  }
+
+  td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .rating {
+    text-align: right;
+    font-family: 'Courier New', monospace;
+  }
+
+  footer {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  footer a {
+    color: #b0d0ff;
+  }
+
+  @media (max-width: 768px) {
+    body { padding: 1rem 0.3rem; }
+    .table-container { padding: 0.3rem; }
+    th, td { padding: 0.25rem 0.3rem; }
+    .group-section { margin-bottom: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+  <header>Teamleden Smash '70</header>
+  <div class="subtitle">Spelers per team en competitie</div>
+  <div class="group-section">
+    <div class="group-title">Landelijk - Jeugd Kampioensgroep</div>
+      <div class="team-name">Smash '70 (H) 1</div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Speler</th><th class="rating">Rating</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Marres, T. (Thomas) (M)</td><td class="rating">1618</td></tr>
+            <tr><td>Gerritsen, F.R.I. (Floortje) (V)</td><td class="rating">1649</td></tr>
+            <tr><td>`t Holt, T. van (Thijmen) (M)</td><td class="rating">1740</td></tr>
+            <tr><td>Pronk, D. (David) (M)</td><td class="rating">1503</td></tr>
+            <tr><td>Holt, A. van `t (Anniek) (V)</td><td class="rating">1740</td></tr>
+            <tr><td>anoniem</td><td class="rating"></td></tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+  <div class="group-section">
+    <div class="group-title">Landelijk - Senioren Eredivisie</div>
+      <div class="team-name">van Wijnen/Smash '70 1</div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Speler</th><th class="rating">Rating</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Last, G. (Gerben) (M)</td><td class="rating">2146</td></tr>
+            <tr><td>Vries, M. de (Martijn) (M)</td><td class="rating">2240</td></tr>
+            <tr><td>Verwoert, C. (Chris) (M)</td><td class="rating">2148</td></tr>
+            <tr><td>Ronde, B. (Brent) (M)</td><td class="rating">2343</td></tr>
+            <tr><td>Bosbach, L. (Lukas) (M)</td><td class="rating">2391</td></tr>
+            <tr><td>Givone, N. (Nolan) (M)</td><td class="rating">2401</td></tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+  <div class="group-section">
+    <div class="group-title">Oost - Jeugd</div>
+      <div class="team-name">Smash '70 (H) 2</div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Speler</th><th class="rating">Rating</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Dekker, T.W. (Thobias) (M)</td><td class="rating">194</td></tr>
+            <tr><td>Smaling, F. (Florian) (M)</td><td class="rating">28</td></tr>
+            <tr><td>Schaatsbergen, K.D. (Katarina) (V)</td><td class="rating">207</td></tr>
+            <tr><td>Kamphuis, A.W. (Aron) (M)</td><td class="rating">283</td></tr>
+            <tr><td>anoniem</td><td class="rating"></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="team-name">Smash '70 (H) 3</div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Speler</th><th class="rating">Rating</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Musa, S. (Samuel) (M)</td><td class="rating">141</td></tr>
+            <tr><td>Musa, G. (Gabriel) (M)</td><td class="rating">144</td></tr>
+            <tr><td>anoniem</td><td class="rating"></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="team-name">Smash '70 (H) 4</div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Speler</th><th class="rating">Rating</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Dutman, D.B. (Derkjan) (M)</td><td class="rating">13</td></tr>
+            <tr><td>Halleen, L. (Lenk) (M)</td><td class="rating">25</td></tr>
+            <tr><td>Post, D. (Daniëlle) (V)</td><td class="rating">34</td></tr>
+            <tr><td>anoniem</td><td class="rating"></td></tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+  <div class="group-section">
+    <div class="group-title">Oost - Senioren</div>
+      <div class="team-name">Smash '70 (H) 2</div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Speler</th><th class="rating">Rating</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Sellies, H.H. (Harry) (M)</td><td class="rating">1506</td></tr>
+            <tr><td>Bisschop, W. (Wout) (M)</td><td class="rating">1542</td></tr>
+            <tr><td>Unen, R. van (Ronald) (M)</td><td class="rating">1473</td></tr>
+            <tr><td>Sellies, T. (Tom) (M)</td><td class="rating">1655</td></tr>
+            <tr><td>Holt, A. van `t (Anniek) (V)</td><td class="rating">1740</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="team-name">Smash '70 (H) 3</div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Speler</th><th class="rating">Rating</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Drost, H. (Henk) (M)</td><td class="rating">1503</td></tr>
+            <tr><td>Tijssen, S. (Steven) (M)</td><td class="rating">1592</td></tr>
+            <tr><td>Halm, W. van (Wouter) (M)</td><td class="rating">1466</td></tr>
+            <tr><td>Weert, R. de (Robin) (M)</td><td class="rating">1537</td></tr>
+            <tr><td>`t Holt, T. van (Thijmen) (M)</td><td class="rating">1740</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="team-name">Smash '70 (H) 4</div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Speler</th><th class="rating">Rating</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Roos, M. de (Martin) (M)</td><td class="rating">1102</td></tr>
+            <tr><td>Worp, J. van der (Jacco) (M)</td><td class="rating">1133</td></tr>
+            <tr><td>Zwakenberg, N. (Nadine) (V)</td><td class="rating">1208</td></tr>
+            <tr><td>Sellies, R. (Robin) (M)</td><td class="rating">1342</td></tr>
+            <tr><td>Selling, R. van (Roel) (M)</td><td class="rating">1130</td></tr>
+            <tr><td>Slagter, S.H. (Sem) (M)</td><td class="rating">1213</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="team-name">Smash '70 (H) 5</div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Speler</th><th class="rating">Rating</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Teekman, J. (Jan) (M)</td><td class="rating">1067</td></tr>
+            <tr><td>Kers, E. (Elian) (M)</td><td class="rating">1098</td></tr>
+            <tr><td>Talaljan, K. (Karen) (M)</td><td class="rating">1179</td></tr>
+            <tr><td>Sneller, H. (Rik) (M)</td><td class="rating">971</td></tr>
+            <tr><td>Wezel, H.B. van (Harry) (M)</td><td class="rating">1031</td></tr>
+            <tr><td>Schunselaar, R.E. (Bob) (M)</td><td class="rating">1094</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="team-name">Smash '70 (H) 6</div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Speler</th><th class="rating">Rating</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Ziel, E. van de (Erik) (M)</td><td class="rating">916</td></tr>
+            <tr><td>Bos, A.M. (Arnoud) (M)</td><td class="rating">870</td></tr>
+            <tr><td>Bosch, S. van den (Samantha) (V)</td><td class="rating">950</td></tr>
+            <tr><td>Buter, E. (Evert) (M)</td><td class="rating">962</td></tr>
+            <tr><td>Bouwmeester, E.W. (Ernst) (M)</td><td class="rating">844</td></tr>
+            <tr><td>Westerbeek, R.K. (Roel) (M)</td><td class="rating">925</td></tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+  <div class="group-section">
+    <div class="group-title">Oost - Senioren Duo</div>
+      <div class="team-name">Smash '70 (H) 3</div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Speler</th><th class="rating">Rating</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lans, B.W. (Ben) (M)</td><td class="rating">698</td></tr>
+            <tr><td>Schakelaar, J. (Jan) (M)</td><td class="rating">627</td></tr>
+            <tr><td>Biegnole, D. (Dominique) (V)</td><td class="rating">697</td></tr>
+            <tr><td>Mulder, M. (Theo) (M)</td><td class="rating">813</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="team-name">Smash '70 (H) 4</div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Speler</th><th class="rating">Rating</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Last, B. (Bert) (M)</td><td class="rating">531</td></tr>
+            <tr><td>Sneller, L.D. (Laura) (V)</td><td class="rating">687</td></tr>
+            <tr><td>Rijssen, E. van (Elaine) (V)</td><td class="rating">752</td></tr>
+            <tr><td>Horst, T.M. (Tom) (M)</td><td class="rating">688</td></tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+  <footer>
+    Dagelijks ververst. Bron: <a href="https://nttb-ranglijsten.nl" target="_blank" rel="noopener noreferrer">nttb-ranglijsten.nl</a>
+  </footer>
+</body>
+</html>
