@@ -197,7 +197,7 @@ def generate_html(team_groups):
     for group_name, teams in team_groups:
         teams_html = ""
         for tm in teams:
-            players = tm["players"]
+            players = [p for p in tm["players"] if p["name"].strip().lower() != "anoniem"]
             if not players:
                 continue
             rows_html = ""
