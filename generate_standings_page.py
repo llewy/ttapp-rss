@@ -22,7 +22,7 @@ CSS_STYLE = """
     place-items: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, rgba(0, 91, 172, 0.9), rgba(0, 123, 255, 0.9)),
-                url('https://smash70.com/wp-content/uploads/2023/09/R188174-bewerkt-scaled.jpg') no-repeat center center fixed;
+                url('images/R188174-bewerkt-scaled.jpg') no-repeat center center fixed;
     background-size: cover;
     color: white;
     padding: 2rem;

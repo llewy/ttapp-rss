@@ -27,7 +27,7 @@ CSS_STYLE = """
     place-items: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(rgba(10, 30, 60, 0.85), rgba(10, 30, 60, 0.85)),
-                url('https://smash70.com/wp-content/uploads/2024/04/Kidspong-3.jpg') no-repeat center center fixed;
+                url('images/Kidspong-3.jpg') no-repeat center center fixed;
     background-size: cover;
     color: white;
     padding: 1.5rem;
