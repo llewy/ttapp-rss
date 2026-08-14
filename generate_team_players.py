@@ -277,7 +277,7 @@ def main():
     if sorted_groups:
         generate_html(sorted_groups)
     else:
-        print("No team player data found.")
+        print("No team players data found.")
 
 
 if __name__ == "__main__":
